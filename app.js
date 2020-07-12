@@ -10,6 +10,7 @@ const indexRoutes = require('./routes/index')
 const moviesRoutes = require('./routes/movies')
 
 // database connection
+const mongoConnect = require('./util/database').mongoConnect
 
 // create the express application
 const app = express();
@@ -35,4 +36,11 @@ app.use((req, res, next) => {
     });
 });
 
+// Connect to mongodb
+mongoConnect(()=>{
+    console.log('Ok')
+})
+
 module.exports = app;
+
+

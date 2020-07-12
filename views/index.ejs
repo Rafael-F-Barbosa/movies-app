@@ -5,14 +5,18 @@
     <%- include('includes/header.ejs') %>
     <main>        
         <div class="movies_grid">
-            <% movies.forEach(movie => { %>
-                <div class="movie_card">
-                    <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="">
-                    <div>Title: <%= movie.title %> </div>
-                    <div>Director: <%= movie.director %> </div>
-                    <div>Year: <%= movie.year %> </div>
-                </div>
-            <% }) %>
+            <% if (movies.length) { %>
+                <% movies.forEach(movie => { %>
+                    <div class="movie_card">
+                        <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="">
+                        <div>Title: <%= movie.title %> </div>
+                        <div>Director: <%= movie.director %> </div>
+                        <div>Year: <%= movie.year %> </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <h1>No movies to show</h1>
+            <% } %>
         </div>
     </main>
 </body>
