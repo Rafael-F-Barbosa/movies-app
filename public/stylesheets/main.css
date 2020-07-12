@@ -61,10 +61,16 @@
 
 main{
     width: 100%;
+    /* height: 95vh; */
     /* background-color: thistle; */
+    /* background-color: #363636; */
     display: flex;
     justify-content: center;
 }
+
+/* FORM */
+
+
 .movie_form{
     display: flex;
     flex-direction: column;
@@ -94,4 +100,33 @@ main{
     display: block;
     margin: 10px auto 0;
     width: 100px;
+}
+
+/* Movies cards */
+.movies_grid{
+    width: 95%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.movie_card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 350px;
+    margin: 5% auto;
+    padding-top: 5%;
+    box-sizing: border-box;
+    background-color: #363636;
+    border: 3px solid white;
+    border-radius: 12px;
+}
+.movie_card img{
+    height: 67%;
+    width: 90%;
+}
+.movie_card div{
+    margin-top: 1%;
+    height: 10%;
 }
