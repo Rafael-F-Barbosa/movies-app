@@ -16,3 +16,12 @@ exports.postAddMovies = (req, res, next) => {
 		})
 		.catch((err) => console.log(err));
 };
+
+exports.getMovie = (req, res, next) => {
+	const movieId = req.params.movieId;
+	Movie.findById(movieId)
+		.then((movie) => {
+            res.render('movie-details', { pageTitle: movie.title, movie: movie });
+		})
+		.catch((err) => console.log(err));
+};

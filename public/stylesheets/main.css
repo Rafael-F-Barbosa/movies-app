@@ -122,11 +122,32 @@ main{
     border: 3px solid white;
     border-radius: 12px;
 }
-.movie_card img{
+.movie_card a{
     height: 67%;
     width: 90%;
+}
+.movie_card img{
+    height: 100%;
+    width: 100%;
 }
 .movie_card div{
     margin-top: 1%;
     height: 10%;
+}
+
+.movie_detailed{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 16px;
+    /* background-color: burlywood; */
+}
+.movie_detailed img{
+    width: 400px;
+    height: 500px;
+}
+.movie_detailed div{
+    margin-top: 5px;
+    height: 32px;
 }

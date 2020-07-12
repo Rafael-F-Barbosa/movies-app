@@ -1,4 +1,5 @@
 const getDb = require('../util/database').getDb;
+const mongodb = require('mongodb')
 
 module.exports = class Movie {
 	constructor(title, director, year) {
@@ -26,5 +27,17 @@ module.exports = class Movie {
             return movies;
         })
         .catch((err)=>console.log(err));
+    }
+    static findById(movieId){
+        const db = getDb();
+        return db
+        .collection('movies')
+        .find({_id: new mongodb.ObjectId(movieId)})
+        .next()
+        .then(movie=>{
+            console.log('Movie Found')
+            return movie;
+        })
+        .catch(err=>console.log(err))
     }
 };
