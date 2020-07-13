@@ -1,20 +1,18 @@
 const getDb = require('../util/database').getDb;
 const mongodb = require('mongodb')
 
-module.exports = class Movie {
-	constructor(title, year, directorName, directorId) {
-		this.title = title;
-        this.year = year;
-        this.directorName = directorName;
-        this.directorId = directorId;
+module.exports = class Director{
+	constructor(name, birthYear, movies) {
+		this.name = name;
+        this.birthYear = birthYear;
+        this.movies = movies;
     }
     save(){
         const db = getDb();
         return db
-        .collection('movies')
+        .collection('directors')
         .insertOne(this)
         .then(result=>{
-            console.log(this)
             return result;
         })
         .catch(err=>console.log(err));
@@ -22,23 +20,22 @@ module.exports = class Movie {
     static fetchAll(){
         const db = getDb();
         return db
-        .collection('movies')
+        .collection('directors')
         .find()
         .toArray()
-        .then((movies)=>{
-            return movies;
+        .then((directors)=>{
+            return directors;
         })
         .catch((err)=>console.log(err));
     }
-    static findById(movieId){
+    static findById(directorId){
         const db = getDb();
         return db
-        .collection('movies')
-        .find({_id: new mongodb.ObjectId(movieId)})
+        .collection('directors')
+        .find({_id: new mongodb.ObjectId(directorId)})
         .next()
-        .then(movie=>{
-            console.log('Movie Found')
-            return movie;
+        .then(director=>{
+            return director;
         })
         .catch(err=>console.log(err))
     }

@@ -8,6 +8,7 @@ const path = require('path')
 // routes
 const indexRoutes = require('./routes/index')
 const moviesRoutes = require('./routes/movies')
+const directorsRoutes = require('./routes/directors')
 
 // database connection
 const mongoConnect = require('./util/database').mongoConnect
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 // mount the app routes
 app.use(indexRoutes)
 app.use('/movies', moviesRoutes)
+app.use('/directors', directorsRoutes)
 
 // error handler
 app.use((req, res, next) => {

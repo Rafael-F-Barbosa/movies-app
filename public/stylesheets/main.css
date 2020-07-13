@@ -95,6 +95,10 @@ main{
     margin-top: 5px;
     width: 95%;
 }
+.form_control select{
+    margin-top: 5px;
+    width: 95%;
+}
 
 .movie_form button{
     display: block;

@@ -12,7 +12,7 @@
                             <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="<%= movie.title %>">
                         </a>
                         <div>Title: <%= movie.title %> </div>
-                        <div>Director: <%= movie.director %> </div>
+                        <div><a href="/directors/director-details/<%= movie.directorId%>">Director: <%= movie.directorName %></a></div>
                         <div>Year: <%= movie.year %> </div>
                     </div>
                 <% }) %>

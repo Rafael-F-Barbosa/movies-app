@@ -1,0 +1,21 @@
+<%- include('includes/head.ejs') %>
+
+</head>
+<body>
+    <%- include('includes/header.ejs') %>
+    <main>
+        <form class="movie_form" action="/directors/add" method="POST">
+            <header>
+                <h2>Add movie</h2>
+            </header>
+            <div class="form_control">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+                <label for="birthYear">Birth Year</label>
+                <input type="number" name="birthYear" id="birthYear">
+            </div>
+            <button type="submit">Add movie</button>
+        </form>
+    </main>
+</body>
+</html>
