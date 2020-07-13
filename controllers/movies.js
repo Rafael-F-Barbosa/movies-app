@@ -18,7 +18,7 @@ exports.postAddMovies = (req, res, next) => {
 		movieCreated
 			.save()
 			.then((movieDb) => {
-				const d = new Director(director.name,director.birthYear, director.movies)
+				const d = new Director(director.name, director.birthYear, director.movies);
 				d.addMovie(movieCreated, director._id).then(() => {
 					res.redirect('/');
 				});

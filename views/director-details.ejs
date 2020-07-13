@@ -4,11 +4,29 @@
 </head>
 <body>
     <%- include('includes/header.ejs') %>
-    <main>
+    <main class="director_details">
         <div class="movie_detailed">
             <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="<%= director.name %>">
             <div>Name: <%= director.name %> </div>
             <div>Year: <%= director.birthYear %> </div>
+        </div>
+        <div class="movies">
+            <h2>Movies</h2>
+            <div class="movies_grid">
+                <% if (director.movies.length) { %>
+                    <% director.movies.forEach(movie => { %>
+                        <div class="movie_card">
+                            <a href="/movies/movie-details/<%= movie._id%>">
+                                <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="<%= movie.title %>">
+                            </a>
+                            <div>Title: <%= movie.title %> </div>
+                            <div>Year: <%= movie.year %> </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <h1>No movies to show</h1>
+                <% } %>
+            </div>
         </div>
     </main>
 </body>

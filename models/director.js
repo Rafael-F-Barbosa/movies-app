@@ -18,9 +18,9 @@ module.exports = class Director {
 			.catch((err) => console.log(err));
 	}
 	addMovie(movie, directorId) {
-        const db = getDb();
+		const db = getDb();
 		this.movies.push(movie);
-        return db.collection('directors').updateOne({_id: directorId},{$set: this});
+		return db.collection('directors').updateOne({ _id: directorId }, { $set: this });
 	}
 	static fetchAll() {
 		const db = getDb();
