@@ -14,10 +14,14 @@ exports.postAddMovies = (req, res, next) => {
 
 	Director.findById(directorId).then((director) => {
 		const movieCreated = new Movie(movieTitle, movieYear, director.name, directorId);
+
 		movieCreated
 			.save()
-			.then(() => {
-				res.redirect('/');
+			.then((movieDb) => {
+				const d = new Director(director.name,director.birthYear, director.movies)
+				d.addMovie(movieCreated, director._id).then(() => {
+					res.redirect('/');
+				});
 			})
 			.catch((err) => console.log(err));
 	});
