@@ -1,4 +1,5 @@
 <%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/stylesheets/movie-details.css">
 
 </head>
 <body>
@@ -7,7 +8,7 @@
         <div class="movie_detailed">
             <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="<%= movie.title %>">
             <div>Title: <%= movie.title %> </div>
-            <div>Director: <%= movie.director %> </div>
+            <div>Director: <%= movie.directorName %> </div>
             <div>Year: <%= movie.year %> </div>
         </div>
     </main>

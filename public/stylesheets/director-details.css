@@ -1,0 +1,16 @@
+.movie_detailed{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 16px;
+    /* background-color: burlywood; */
+}
+.movie_detailed img{
+    width: 400px;
+    height: 500px;
+}
+.movie_detailed div{
+    margin-top: 5px;
+    height: 32px;
+}

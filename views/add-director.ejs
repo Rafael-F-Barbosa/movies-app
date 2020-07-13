@@ -1,4 +1,5 @@
 <%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/stylesheets/form-director.css">
 
 </head>
 <body>
@@ -6,7 +7,7 @@
     <main>
         <form class="movie_form" action="/directors/add" method="POST">
             <header>
-                <h2>Add movie</h2>
+                <h2>Add director</h2>
             </header>
             <div class="form_control">
                 <label for="name">Name</label>
@@ -14,7 +15,7 @@
                 <label for="birthYear">Birth Year</label>
                 <input type="number" name="birthYear" id="birthYear">
             </div>
-            <button type="submit">Add movie</button>
+            <button type="submit">Add director</button>
         </form>
     </main>
 </body>
