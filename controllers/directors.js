@@ -5,7 +5,8 @@ exports.getDirectors = (req, res, next) => {
 		.then((directors) => {
 			res.render('director/directors', {
 				pageTitle: 'Directors',
-				directors: directors
+				directors: directors,
+				isLoggedIn: req.session.isLoggedIn
 			});
 			console.log('Directors fetched from mongodb!');
 		})
@@ -13,7 +14,10 @@ exports.getDirectors = (req, res, next) => {
 };
 
 exports.getAddDirector = (req, res, next) => {
-	res.render('director/add-director', { pageTitle: 'Add director' });
+	res.render('director/add-director', {
+		pageTitle: 'Add director',
+		isLoggedIn: req.session.isLoggedIn
+	});
 };
 
 exports.postAddDirector = (req, res, next) => {
@@ -32,7 +36,11 @@ exports.getDirector = (req, res, next) => {
 	const directorId = req.params.directorId;
 	Director.findById(directorId)
 		.then((director) => {
-			res.render('director/director-details', { pageTitle: director.name, director: director });
+			res.render('director/director-details', {
+				pageTitle: director.name,
+				director: director,
+				isLoggedIn: req.session.isLoggedIn
+			});
 		})
 		.catch((err) => console.log(err));
 };

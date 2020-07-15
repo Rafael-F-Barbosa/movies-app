@@ -10,6 +10,18 @@
             <a href="/movies/add"><li>Add movies</li></a>
             <a href="/directors/add"><li>Add Directors</li></a>
             <a href="/directors"><li>Directors</li></a>
+            
+            <% if (!isLoggedIn) { %>
+                <a href="/login"><li>Login</li></a>
+            <% } else{ %>
+                <a href="">
+                <li>
+                    <form action="/logout" method="post">
+                        <button>Logout</button>
+                    </form>
+                </li>
+                </a>
+            <% } %>
         </ul>
 
     </div>

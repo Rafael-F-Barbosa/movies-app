@@ -5,7 +5,8 @@ exports.getIndex = (req, res, next) => {
 		.then((movies) => {
 			res.render('index', {
 				pageTitle: 'Add movies',
-				movies: movies
+				movies: movies,
+				isLoggedIn: req.session.isLoggedIn
 			});
 			console.log('Movies fetched from mongodb!');
 		})
