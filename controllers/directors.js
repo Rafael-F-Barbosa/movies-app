@@ -3,7 +3,7 @@ const Director = require('../models/director');
 exports.getDirectors = (req, res, next) => {
 	Director.fetchAll()
 		.then((directors) => {
-			res.render('directors', {
+			res.render('director/directors', {
 				pageTitle: 'Directors',
 				directors: directors
 			});
@@ -13,7 +13,7 @@ exports.getDirectors = (req, res, next) => {
 };
 
 exports.getAddDirector = (req, res, next) => {
-	res.render('add-director', { pageTitle: 'Add director' });
+	res.render('director/add-director', { pageTitle: 'Add director' });
 };
 
 exports.postAddDirector = (req, res, next) => {
@@ -30,9 +30,9 @@ exports.postAddDirector = (req, res, next) => {
 
 exports.getDirector = (req, res, next) => {
 	const directorId = req.params.directorId;
-    Director.findById(directorId)
+	Director.findById(directorId)
 		.then((director) => {
-            res.render('director-details', { pageTitle: director.name, director: director });
+			res.render('director/director-details', { pageTitle: director.name, director: director });
 		})
 		.catch((err) => console.log(err));
 };

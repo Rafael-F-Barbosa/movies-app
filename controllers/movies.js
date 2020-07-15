@@ -3,7 +3,7 @@ const Director = require('../models/director');
 
 exports.getAddMovies = (req, res, next) => {
 	Director.fetchAll().then((directors) => {
-		res.render('add-movie', { pageTitle: 'Add movies', directors: directors });
+		res.render('movie/add-movie', { pageTitle: 'Add movies', directors: directors });
 	});
 };
 
@@ -31,7 +31,7 @@ exports.getMovie = (req, res, next) => {
 	const movieId = req.params.movieId;
 	Movie.findById(movieId)
 		.then((movie) => {
-			res.render('movie-details', { pageTitle: movie.title, movie: movie });
+			res.render('movie/movie-details', { pageTitle: movie.title, movie: movie });
 		})
 		.catch((err) => console.log(err));
 };
