@@ -21,3 +21,12 @@ exports.postLogout = (req, res, next) => {
 		res.redirect('/');
 	});
 };
+
+exports.getSignUp = (req, res, next) => {
+	res.render('auth/sign-up', { pageTitle: 'Sign up', isLoggedIn: req.session.isLoggedIn });
+};
+
+exports.postSignUp = (req, res, next) => {
+	console.log('sucess');
+	res.redirect('/login');
+};

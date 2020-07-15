@@ -7,12 +7,14 @@
 
         <ul class="navigation">
             <a href="/"><li>Home</li></a>
-            <a href="/movies/add"><li>Add movies</li></a>
-            <a href="/directors/add"><li>Add Directors</li></a>
             <a href="/directors"><li>Directors</li></a>
-            
+            <% if (isLoggedIn) { %>
+                <a href="/movies/add"><li>Add movies</li></a>
+                <a href="/directors/add"><li>Add Directors</li></a>
+            <% } %>
             <% if (!isLoggedIn) { %>
                 <a href="/login"><li>Login</li></a>
+                <a href="/sign-up"><li>Sign up</li></a>
             <% } else{ %>
                 <a href="">
                 <li>
