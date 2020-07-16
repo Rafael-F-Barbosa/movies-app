@@ -1,6 +1,19 @@
 const Movie = require('../models/movie');
 const Director = require('../models/director');
 
+exports.getMovies = (req, res, next) => {
+	Movie.fetchAll()
+		.then((movies) => {
+			res.render('movie/movies', {
+				pageTitle: 'Add movies',
+				movies: movies,
+				isLoggedIn: req.session.isLoggedIn
+			});
+			console.log('Movies fetched from mongodb!');
+		})
+		.catch((err) => console.log(err));
+};
+
 exports.getAddMovies = (req, res, next) => {
 	Director.fetchAll().then((directors) => {
 		res.render('movie/add-movie', {

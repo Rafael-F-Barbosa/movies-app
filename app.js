@@ -8,7 +8,6 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const path = require('path');
 
 // routes
-const indexRoutes = require('./routes/index');
 const moviesRoutes = require('./routes/movies');
 const directorsRoutes = require('./routes/directors');
 const authRoutes = require('./routes/auth');
@@ -42,10 +41,14 @@ app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false, 
 // end Some middleres
 
 // mount the app routes
-app.use(indexRoutes);
 app.use('/movies', moviesRoutes);
 app.use('/directors', directorsRoutes);
 app.use(authRoutes);
+
+// home redirect
+app.get('/', (req, res, next) => {
+	return res.redirect('/movies');
+});
 
 // error handler
 app.use((req, res, next) => {

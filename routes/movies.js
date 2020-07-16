@@ -6,6 +6,8 @@ const isAuth = require('../middleware/isAuth');
 
 const router = express.Router();
 
+router.get('/', moviesController.getMovies);
+
 router.get('/add', isAuth, moviesController.getAddMovies);
 
 router.post('/add', isAuth, moviesController.postAddMovies);
