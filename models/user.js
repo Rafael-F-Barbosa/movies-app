@@ -2,10 +2,12 @@ const getDb = require('../util/database').getDb;
 const mongodb = require('mongodb');
 
 module.exports = class User {
-	constructor(name, email, password) {
+	constructor(name, email, password, watchedMovies, wishMovies) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.watchedMovies = watchedMovies;
+		this.wishMovies = wishMovies;
 	}
 	save() {
 		const db = getDb();
@@ -35,8 +37,19 @@ module.exports = class User {
 			.collection('users')
 			.find({ _id: new mongodb.ObjectId(userId) })
 			.next()
-			.then((movie) => {
-				return movie;
+			.then((user) => {
+				return user;
+			})
+			.catch((err) => console.log(err));
+	}
+	static findByEmail(userEmail) {
+		const db = getDb();
+		return db
+			.collection('users')
+			.find({ email: userEmail })
+			.next()
+			.then((user) => {
+				return user;
 			})
 			.catch((err) => console.log(err));
 	}
