@@ -24,6 +24,7 @@ exports.postLogin = (req, res, next) => {
 						return res.redirect('/login');
 					}
 					req.session.isLoggedIn = true;
+					req.session.user = user;
 					return req.session.save((err) => {
 						console.log(err);
 						return res.redirect('/');

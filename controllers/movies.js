@@ -5,7 +5,7 @@ exports.getMovies = (req, res, next) => {
 	Movie.fetchAll()
 		.then((movies) => {
 			res.render('movie/movies', {
-				pageTitle: 'Add movies',
+				pageTitle: 'All movies',
 				movies: movies,
 				isLoggedIn: req.session.isLoggedIn
 			});

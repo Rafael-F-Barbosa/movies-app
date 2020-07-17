@@ -11,6 +11,7 @@ const path = require('path');
 const moviesRoutes = require('./routes/movies');
 const directorsRoutes = require('./routes/directors');
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 // database connection
 const mongoConnect = require('./util/database').mongoConnect;
@@ -41,6 +42,7 @@ app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false, 
 // end Some middleres
 
 // mount the app routes
+app.use(userRoutes);
 app.use('/movies', moviesRoutes);
 app.use('/directors', directorsRoutes);
 app.use(authRoutes);

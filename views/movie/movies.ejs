@@ -4,7 +4,8 @@
 </head>
 <body>
     <%- include('../includes/header.ejs') %>
-    <main>        
+    <main>
+        <h1><%= pageTitle %></h1>        
         <div class="movies_grid">
             <% if (movies.length) { %>
                 <% movies.forEach(movie => { %>
