@@ -62,7 +62,7 @@ exports.postAddWatched = (req, res, next) => {
 	const user = req.user;
 	const movieId = req.body.movieId;
 	user
-		.saveToWatchList(movieId, '5f105e4e3ec3cb3f5f78f950')
+		.saveToWatchList(movieId, req.session.user._id)
 		.then(() => {
 			res.redirect(`/movies/movie-details/${movieId}`);
 		})

@@ -63,7 +63,7 @@ module.exports = class User {
 			})
 		)
 			.then((listOfMovies) => {
-				// console.log(listOfMovies);
+				console.log(listOfMovies);
 				return listOfMovies;
 			})
 			.catch((err) => {
