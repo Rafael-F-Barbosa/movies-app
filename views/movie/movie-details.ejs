@@ -10,6 +10,16 @@
             <div>Title: <%= movie.title %> </div>
             <div>Director: <%= movie.directorName %> </div>
             <div>Year: <%= movie.year %> </div>
+            <% if (isLoggedIn) { %>
+                <form action="/movies/add-to-watched/" method="post">
+                    <input type="hidden" name="movieId" value="<%=movie._id%>">
+                    <button type="submit">Add to watched</button>
+                </form>
+                <form action="/movies/add-to-wish/" method="post">
+                    <input type="hidden" name="movieId" value="<%=movie._id%>">
+                    <button type="submit">Add to wish</button>
+                </form>
+            <% } %>
         </div>
     </main>
 </body>

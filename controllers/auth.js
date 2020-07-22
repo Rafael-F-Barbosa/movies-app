@@ -23,6 +23,7 @@ exports.postLogin = (req, res, next) => {
 					if (!doMatch) {
 						return res.redirect('/login');
 					}
+					console.log(user);
 					req.session.isLoggedIn = true;
 					req.session.user = user;
 					return req.session.save((err) => {

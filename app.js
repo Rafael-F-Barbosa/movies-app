@@ -13,6 +13,9 @@ const directorsRoutes = require('./routes/directors');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 
+// models
+const User = require('./models/user');
+
 // database connection
 const mongoConnect = require('./util/database').mongoConnect;
 
@@ -37,7 +40,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // sessions initialize and configured
-app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false, store: store }));
+app.use(
+	session({
+		secret: 'my secret',
+		resave: false,
+		saveUninitialized: false,
+		store: store
+	})
+);
+// getting the user in the correct object format
+app.use((req, res, next) => {
+	if (!req.session.user) {
+		return next();
+	}
+	User.findById(req.session.user._id)
+		.then((user) => {
+			console.log(user.name + ' sendo usado');
+			req.user = new User(user.name, user.email, user.password, user.watchedMovies, user.wishMovies);
+			next();
+		})
+		.catch((err) => console.log(err));
+});
 
 // end Some middleres
 

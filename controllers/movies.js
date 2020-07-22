@@ -1,5 +1,6 @@
 const Movie = require('../models/movie');
 const Director = require('../models/director');
+// const User = require('../models/user');
 
 exports.getMovies = (req, res, next) => {
 	Movie.fetchAll()
@@ -55,4 +56,23 @@ exports.getMovie = (req, res, next) => {
 			});
 		})
 		.catch((err) => console.log(err));
+};
+
+exports.postAddWatched = (req, res, next) => {
+	const user = req.user;
+	const movieId = req.body.movieId;
+	user
+		.saveToWatchList(movieId, '5f105e4e3ec3cb3f5f78f950')
+		.then(() => {
+			res.redirect(`/movies/movie-details/${movieId}`);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
+exports.postAddWish = (req, res, next) => {
+	console.log('wish');
+	console.log(req.user);
+	res.redirect(`/movies/movie-details/${req.body.movieId}`);
 };

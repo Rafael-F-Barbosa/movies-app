@@ -20,6 +20,20 @@ module.exports = class User {
 			})
 			.catch((err) => console.log(err));
 	}
+	saveToWatchList(m, idi) {
+		this.watchedMovies.push(m);
+		console.log(this.watchedMovies, 'id:', idi);
+		const db = getDb();
+		return db
+			.collection('users')
+			.updateOne({ _id: new mongodb.ObjectId(idi) }, { $set: this })
+			.then((result) => {
+				console.log('movie added to wl');
+				// console.log(result);
+				return result;
+			})
+			.catch((err) => console.log(err));
+	}
 	static fetchAll() {
 		const db = getDb();
 		return db

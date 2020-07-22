@@ -1,5 +1,5 @@
 exports.getWatchedMovies = (req, res, next) => {
-	const movies = req.session.user.watchedMovies;
+	const movies = req.user.watchedMovies;
 
 	res.render('movie/movies', {
 		pageTitle: 'My movies',

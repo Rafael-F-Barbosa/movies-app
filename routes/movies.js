@@ -14,4 +14,8 @@ router.post('/add', isAuth, moviesController.postAddMovies);
 
 router.get('/movie-details/:movieId', moviesController.getMovie);
 
+router.post('/add-to-watched', isAuth, moviesController.postAddWatched);
+
+router.post('/add-to-wish', isAuth, moviesController.postAddWish);
+
 module.exports = router;
