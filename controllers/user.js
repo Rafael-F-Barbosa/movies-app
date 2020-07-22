@@ -4,7 +4,8 @@ exports.getWatchedMovies = (req, res, next) => {
 		res.render('movie/movies', {
 			pageTitle: 'My movies',
 			movies: movies,
-			isLoggedIn: req.session.isLoggedIn
+			isLoggedIn: req.session.isLoggedIn,
+			userList: 'watched'
 		});
 	});
 };
@@ -15,7 +16,8 @@ exports.getsWishedList = (req, res, next) => {
 		res.render('movie/movies', {
 			pageTitle: 'Wished list',
 			movies: movies,
-			isLoggedIn: req.session.isLoggedIn
+			isLoggedIn: req.session.isLoggedIn,
+			userList: 'wish'
 		});
 	});
 };

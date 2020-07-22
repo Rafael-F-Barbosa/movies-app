@@ -1,6 +1,5 @@
 const Movie = require('../models/movie');
 const Director = require('../models/director');
-// const User = require('../models/user');
 
 exports.getMovies = (req, res, next) => {
 	Movie.fetchAll()
@@ -8,7 +7,8 @@ exports.getMovies = (req, res, next) => {
 			res.render('movie/movies', {
 				pageTitle: 'All movies',
 				movies: movies,
-				isLoggedIn: req.session.isLoggedIn
+				isLoggedIn: req.session.isLoggedIn,
+				userList: null
 			});
 			console.log('Movies fetched from mongodb!');
 		})
@@ -70,6 +70,19 @@ exports.postAddWatched = (req, res, next) => {
 			console.log(err);
 		});
 };
+exports.postDeleteWatched = (req, res, next) => {
+	const movieId = req.body.movieId;
+	req.user
+		.deleteWatched(movieId, req.session.user._id)
+		.then(() => {
+			console.log('movie deleted');
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+
+	res.redirect('/watched-movies');
+};
 
 exports.postAddWish = (req, res, next) => {
 	const user = req.user;
@@ -82,4 +95,18 @@ exports.postAddWish = (req, res, next) => {
 		.catch((err) => {
 			console.log(err);
 		});
+};
+
+exports.postDeleteWish = (req, res, next) => {
+	const movieId = req.body.movieId;
+	req.user
+		.deleteWish(movieId, req.session.user._id)
+		.then(() => {
+			console.log('movie deleted');
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+
+	res.redirect('/wish-list');
 };

@@ -31,7 +31,6 @@ module.exports = class User {
 			.updateOne({ _id: new mongodb.ObjectId(idi) }, { $set: this })
 			.then((result) => {
 				console.log('movie added to wl');
-				// console.log(result);
 				return result;
 			})
 			.catch((err) => console.log(err));
@@ -44,8 +43,7 @@ module.exports = class User {
 			.collection('users')
 			.updateOne({ _id: new mongodb.ObjectId(idi) }, { $set: this })
 			.then((result) => {
-				console.log('movie added to wl');
-				// console.log(result);
+				console.log('movie added to wish');
 				return result;
 			})
 			.catch((err) => console.log(err));
@@ -60,13 +58,35 @@ module.exports = class User {
 				});
 			})
 		)
-			.then((result) => {
-				console.log(result);
-				return result;
+			.then((listOfMovies) => {
+				// console.log(listOfMovies);
+				return listOfMovies;
 			})
 			.catch((err) => {
 				console.log(err);
 			});
+	}
+	deleteWatched(movieId, userId) {
+		const updatedMovies = this.watchedMovies.filter((movie) => movie.toString() !== movieId.toString());
+		const db = getDb();
+		return db
+			.collection('users')
+			.updateOne({ _id: new mongodb.ObjectId(userId) }, { $set: { watchedMovies: updatedMovies } })
+			.then((result) => {
+				return result;
+			})
+			.catch((err) => console.log(err));
+	}
+	deleteWish(movieId, userId) {
+		const updatedMovies = this.wishMovies.filter((movie) => movie.toString() !== movieId.toString());
+		const db = getDb();
+		return db
+			.collection('users')
+			.updateOne({ _id: new mongodb.ObjectId(userId) }, { $set: { wishMovies: updatedMovies } })
+			.then((result) => {
+				return result;
+			})
+			.catch((err) => console.log(err));
 	}
 
 	static fetchAll() {

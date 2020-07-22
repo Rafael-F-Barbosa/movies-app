@@ -16,6 +16,14 @@
                         <div>Title: <%= movie.title %> </div>
                         <div><a href="/directors/director-details/<%= movie.directorId%>">Director: <%= movie.directorName %></a></div>
                         <div>Year: <%= movie.year %> </div>
+                        <% if (userList) { %>
+                            <div>
+                            <form action="/movies/delete-<%= userList %>" method="post">
+                                <input type="hidden" name="movieId" value="<%= movie._id %>">
+                                <button>Delete</button>
+                            </form>
+                            </div>
+                        <% } %>
                     </div>
                 <% }) %>
             <% } else { %>
