@@ -55,7 +55,7 @@ app.use((req, res, next) => {
 	}
 	User.findById(req.session.user._id)
 		.then((user) => {
-			console.log(user.name + ' sendo usado');
+			console.log('user:' + user.name + ' sendo usado');
 			req.user = new User(user.name, user.email, user.password, user.watchedMovies, user.wishMovies);
 			next();
 		})

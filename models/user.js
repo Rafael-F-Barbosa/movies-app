@@ -22,26 +22,30 @@ module.exports = class User {
 			})
 			.catch((err) => console.log(err));
 	}
-	saveToWatchList(m, idi) {
-		this.watchedMovies.push(m);
-		console.log(this.watchedMovies, 'id:', idi);
+	saveToWatchList(movie, userId) {
+		const movieIndex = this.watchedMovies.findIndex((element) => element.toString() === movie.toString());
+		if (movieIndex === -1) {
+			this.watchedMovies.push(movie);
+		}
 		const db = getDb();
 		return db
 			.collection('users')
-			.updateOne({ _id: new mongodb.ObjectId(idi) }, { $set: this })
+			.updateOne({ _id: new mongodb.ObjectId(userId) }, { $set: this })
 			.then((result) => {
 				console.log('movie added to wl');
 				return result;
 			})
 			.catch((err) => console.log(err));
 	}
-	saveToWishList(m, idi) {
-		this.wishMovies.push(m);
-		console.log(this.wishMovies, 'id:', idi);
+	saveToWishList(movie, userId) {
+		const movieIndex = this.wishMovies.findIndex((element) => element.toString() === movie.toString());
+		if (movieIndex === -1) {
+			this.wishMovies.push(movie);
+		}
 		const db = getDb();
 		return db
 			.collection('users')
-			.updateOne({ _id: new mongodb.ObjectId(idi) }, { $set: this })
+			.updateOne({ _id: new mongodb.ObjectId(userId) }, { $set: this })
 			.then((result) => {
 				console.log('movie added to wish');
 				return result;
