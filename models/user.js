@@ -1,6 +1,8 @@
 const getDb = require('../util/database').getDb;
 const mongodb = require('mongodb');
 
+const Movie = require('../models/movie');
+
 module.exports = class User {
 	constructor(name, email, password, watchedMovies, wishMovies) {
 		this.name = name;
@@ -34,6 +36,39 @@ module.exports = class User {
 			})
 			.catch((err) => console.log(err));
 	}
+	saveToWishList(m, idi) {
+		this.wishMovies.push(m);
+		console.log(this.wishMovies, 'id:', idi);
+		const db = getDb();
+		return db
+			.collection('users')
+			.updateOne({ _id: new mongodb.ObjectId(idi) }, { $set: this })
+			.then((result) => {
+				console.log('movie added to wl');
+				// console.log(result);
+				return result;
+			})
+			.catch((err) => console.log(err));
+	}
+	getMyMovies(moviesIds) {
+		return Promise.all(
+			moviesIds.map((elementId) => {
+				return new Promise((resolve, reject) => {
+					Movie.findById(elementId).then((movie) => resolve(movie)).catch((err) => {
+						console.log(err);
+					});
+				});
+			})
+		)
+			.then((result) => {
+				console.log(result);
+				return result;
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}
+
 	static fetchAll() {
 		const db = getDb();
 		return db

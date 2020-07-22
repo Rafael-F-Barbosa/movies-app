@@ -72,7 +72,14 @@ exports.postAddWatched = (req, res, next) => {
 };
 
 exports.postAddWish = (req, res, next) => {
-	console.log('wish');
-	console.log(req.user);
-	res.redirect(`/movies/movie-details/${req.body.movieId}`);
+	const user = req.user;
+	const movieId = req.body.movieId;
+	user
+		.saveToWishList(movieId, req.session.user._id)
+		.then(() => {
+			res.redirect(`/movies/movie-details/${req.body.movieId}`);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 };
