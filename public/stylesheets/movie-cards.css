@@ -18,11 +18,11 @@ main h1 {
 	flex-direction: column;
 	align-items: center;
 	width: 90%;
-	height: 350px;
+	height: 375px;
 	margin: 5% auto;
 	padding-top: 5%;
 	box-sizing: border-box;
-	background-color: #363636;
+	background-color: #101010;
 	border: 3px solid white;
 	border-radius: 12px;
 }
@@ -35,10 +35,26 @@ main h1 {
 	width: 100%;
 }
 .movie_card div {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	width: 100%;
 	margin-top: 1%;
 	height: 10%;
+	color: white;
 }
 .movie_card div a {
 	text-decoration: none;
-	color: black;
+	color: white;
+}
+.card_button {
+	width: 70px;
+	background-color: red;
+	color: white;
+	border: none;
+	border-radius: 5px;
+}
+.card_button:hover {
+	transform: scale(1.1);
+	cursor: pointer;
 }
