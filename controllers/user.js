@@ -5,7 +5,8 @@ exports.getWatchedMovies = (req, res, next) => {
 			pageTitle: 'My movies',
 			movies: movies,
 			isLoggedIn: req.session.isLoggedIn,
-			userList: 'watched'
+			userList: 'watched',
+			path: '/watched-movies'
 		});
 	});
 };
@@ -17,7 +18,8 @@ exports.getsWishedList = (req, res, next) => {
 			pageTitle: 'Wished list',
 			movies: movies,
 			isLoggedIn: req.session.isLoggedIn,
-			userList: 'wish'
+			userList: 'wish',
+			path: '/wish-list'
 		});
 	});
 };

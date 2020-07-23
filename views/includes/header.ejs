@@ -6,21 +6,37 @@
         </div>
 
         <ul class="navigation">
-            <a href="/directors"><li>Directors</li></a>
-            <% if (!isLoggedIn) { %>
-                <a href="/login"><li>Login</li></a>
-                <a href="/sign-up"><li>Sign up</li></a>
-                <% } else{ %>
-                    <a href="/watched-movies"><li>Watched</li></a>
-                    <a href="/wish-list"><li>Wish</li></a>
-                    <a href="/movies/add"><li>Add m</li></a>
-                    <a href="/directors/add"><li>Add d</li></a>
-                    <a href="">
-                        <li>
-                    <form action="/logout" method="post">
-                        <button>Logout</button>
-                    </form>
+            <a href="/directors">
+                <li class="<%= path=='/directors'?'active':'' %>">Directors
                 </li>
+            </a>
+            <% if (!isLoggedIn) { %>
+                <a href="/login">
+                    <li class="<%= path=='/login'?'active':'' %>">Login</li>
+                </a>
+                <a href="/sign-up">
+                    <li class="<%= path=='/sign-up'?'active':'' %>">Sign up</li>
+                </a>
+                <% } 
+            else{ %>
+                <a href="/watched-movies">
+                    <li class="<%= path=='/watched-movies'?'active':'' %>">Watched</li>
+                </a>
+                <a href="/wish-list">
+                    <li class="<%= path=='/wish-list'?'active':'' %>">Wish</li>
+                </a>
+                <a href="/movies/add">
+                    <li class="<%= path=='/movies/add'?'active':'' %>">Add m</li>
+                </a>
+                <a href="/directors/add">
+                    <li class="<%= path=='/directors/add'?'active':'' %>">Add d</li>
+                </a>
+                <a href="">
+                    <li>
+                        <form action="/logout" method="post">
+                            <button>Logout</button>
+                        </form>
+                    </li>
                 </a>
             <% } %>
         </ul>

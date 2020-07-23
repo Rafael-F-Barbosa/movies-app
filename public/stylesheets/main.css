@@ -54,7 +54,8 @@
 	font-family: 'Montserrat', sans-serif;
 	font-size: 16px;
 }
-.navigation a li:hover {
+.navigation a li:hover,
+.navigation a li.active {
 	color: #ffd700;
 }
 main {

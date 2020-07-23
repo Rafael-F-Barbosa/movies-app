@@ -5,7 +5,8 @@ const bcrypt = require('bcryptjs');
 exports.getLogin = (req, res, next) => {
 	res.render('auth/login', {
 		pageTitle: 'Login',
-		isLoggedIn: req.session.isLoggedIn
+		isLoggedIn: req.session.isLoggedIn,
+		path: '/login'
 	});
 };
 
@@ -44,7 +45,11 @@ exports.postLogout = (req, res, next) => {
 };
 
 exports.getSignUp = (req, res, next) => {
-	res.render('auth/sign-up', { pageTitle: 'Sign up', isLoggedIn: req.session.isLoggedIn });
+	res.render('auth/sign-up', {
+		pageTitle: 'Sign up',
+		isLoggedIn: req.session.isLoggedIn,
+		path: '/sign-up'
+	});
 };
 
 exports.postSignUp = (req, res, next) => {

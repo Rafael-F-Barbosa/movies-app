@@ -8,7 +8,8 @@ exports.getMovies = (req, res, next) => {
 				pageTitle: 'All movies',
 				movies: movies,
 				isLoggedIn: req.session.isLoggedIn,
-				userList: null
+				userList: null,
+				path: '/movies'
 			});
 			console.log('Movies fetched from mongodb!');
 		})
@@ -20,7 +21,8 @@ exports.getAddMovies = (req, res, next) => {
 		res.render('movie/add-movie', {
 			pageTitle: 'Add movies',
 			directors: directors,
-			isLoggedIn: req.session.isLoggedIn
+			isLoggedIn: req.session.isLoggedIn,
+			path: '/movies/add'
 		});
 	});
 };
@@ -52,7 +54,8 @@ exports.getMovie = (req, res, next) => {
 			res.render('movie/movie-details', {
 				pageTitle: movie.title,
 				movie: movie,
-				isLoggedIn: req.session.isLoggedIn
+				isLoggedIn: req.session.isLoggedIn,
+				path: ''
 			});
 		})
 		.catch((err) => console.log(err));
