@@ -31,7 +31,7 @@ const store = new MongoDBStore({
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-// Some middleres
+// SOME MIDDLEWARES
 
 // serving files statically
 app.use(express.static(path.join(__dirname, 'public')));
@@ -62,7 +62,7 @@ app.use((req, res, next) => {
 		.catch((err) => console.log(err));
 });
 
-// end Some middleres
+// END MIDDLEWARES
 
 // mount the app routes
 app.use(userRoutes);
