@@ -1,3 +1,4 @@
+/* Desktop navigation */
 .main_header {
 	width: 100vw;
 	height: 80px;
@@ -11,53 +12,91 @@
 	display: block;
 	margin: auto;
 }
+/* Logo and menu icon */
+.header_top {
+	display: flex;
+	height: 80px;
+}
+
+/* Logo */
 .logo_container {
-	height: 100%;
-	display: table;
+	height: 80px;
+	display: flex;
+	align-items: center;
 	float: left;
 }
-.logo_container a {
-	display: table-cell;
-	vertical-align: middle;
-}
 .logo_container h1 {
-	color: white;
+	margin: 0;
+	padding: 0;
 	height: 100%;
-	display: table-cell;
-	vertical-align: middle;
+	line-height: 100%;
+
+	color: white;
 	font-family: 'Montserrat', sans-serif;
-	font-size: 32px;
 	font-weight: 200;
 }
 .logo_container h1 span {
 	font-weight: 800;
 }
+
+/* NAV LIST */
 .navigation {
 	float: right;
 	height: 100%;
+	display: flex;
+	align-items: center;
 }
-.navigation a {
-	height: 100%;
-	display: table;
-	float: left;
-	padding: 0 20px;
-}
-.navigation a:last-child {
-	padding-right: 0;
-}
-.navigation a li {
-	display: table-cell;
+.navigation li {
+	display: flex;
+	align-items: center;
 	vertical-align: middle;
 	height: 100%;
+}
+.navigation li a {
+	display: flex;
+	align-items: center;
 	color: white;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 16px;
+	height: 100%;
+	float: left;
+	padding: 0 20px;
 }
-.navigation a li:hover,
-.navigation a li.active {
+
+.navigation li a:hover,
+.navigation li a.active {
+	color: #ffd700;
+}
+/* Mobile list */
+.navigation_mobile {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	background-color: #101010;
+	padding-bottom: 20px;
+}
+.navigation_mobile li {
+	display: flex;
+	align-items: center;
+	vertical-align: middle;
+	height: 100%;
+}
+.navigation_mobile li a {
+	display: flex;
+	align-items: center;
+	color: white;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	height: 100%;
+	padding: 20px 0px;
+}
+.navigation_mobile li a:hover,
+.navigation_mobile li a.active {
 	color: #ffd700;
 }
 
+/* Form button */
 .nav_button {
 	background-color: #101010;
 	border: none;
@@ -65,8 +104,55 @@
 	color: white;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 16px;
+	padding-left: 20px;
 }
 .nav_button:hover {
 	cursor: pointer;
 	color: #ffd700;
+}
+
+/* Mobile menu icon*/
+.menu_toggle {
+	display: none;
+	float: right;
+}
+
+/* Toggle classses */
+.hide {
+	display: none;
+}
+.open {
+	height: 100%;
+}
+
+@media screen and (max-width: 1050px) {
+	.inner_header {
+		display: flex;
+		flex-direction: column;
+	}
+	.navigation {
+		display: none;
+	}
+	.nav_button {
+		padding-left: 0;
+		padding-top: 20px;
+	}
+
+	/*Menu icon*/
+	.menu_toggle {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 80px;
+	}
+	.menu_toggle:hover {
+		transform: scale(1.05);
+	}
+	.menu_line {
+		width: 35px;
+		height: 5px;
+		background-color: white;
+		margin: 6px 0;
+		border-radius: 3px;
+	}
 }

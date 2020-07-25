@@ -1,49 +1,101 @@
 <header class="main_header">
+    
     <div class="inner_header">
 
-        <div class="logo_container">
-            <a href="/"><h1>My <span>movies</span></h1></a>
+        <div class="head_top">
+            <div class="logo_container">
+                <a href="/"><h1>My <span>movies</span></h1></a>
+            </div>
+        
+            <div class="menu_toggle hide">
+                <div class="menu_lines">
+                    <div class="menu_line"></div>
+                    <div class="menu_line"></div>
+                    <div class="menu_line"></div>
+                </div>
+            </div>
         </div>
+        
+
 
         <ul class="navigation">
-            <a href="/movies">
-                <li class="<%= path=='/movies'?'active':'' %>">Movies
+            
+                <li><a href="/movies" class="<%= path=='/movies'?'active':'' %>">Movies</a>
                 </li>
-            </a>
-            <a href="/directors">
-                <li class="<%= path=='/directors'?'active':'' %>">Directors
+            
+        
+            
+                <li><a href="/directors" class="<%= path=='/directors'?'active':'' %>">Directors</a>
                 </li>
-            </a>
+            
             <% if (!isLoggedIn) { %>
-                <a href="/login">
-                    <li class="<%= path=='/login'?'active':'' %>">Login</li>
-                </a>
-                <a href="/sign-up">
-                    <li class="<%= path=='/sign-up'?'active':'' %>">Sign up</li>
-                </a>
+                
+                    <li><a href="/login" class="<%= path=='/login'?'active':'' %>">Login</a></li>
+                
+                
+                    <li><a href="/sign-up" class="<%= path=='/sign-up'?'active':'' %>">Sign up</a></li>
                 <% } 
             else{ %>
-                <a href="/watched-movies">
-                    <li class="<%= path=='/watched-movies'?'active':'' %>">Watched</li>
-                </a>
-                <a href="/wish-list">
-                    <li class="<%= path=='/wish-list'?'active':'' %>">Wish</li>
-                </a>
-                <a href="/movies/add">
-                    <li class="<%= path=='/movies/add'?'active':'' %>">Add m</li>
-                </a>
-                <a href="/directors/add">
-                    <li class="<%= path=='/directors/add'?'active':'' %>">Add d</li>
-                </a>
-                <a href="">
+                
+                    <li><a href="/watched-movies" class="<%= path=='/watched-movies'?'active':'' %>">Watched</a></li>
+                
+                
+                    <li><a href="/wish-list" class="<%= path=='/wish-list'?'active':'' %>">Wish</a></li>
+                
+                
+                    <li><a href="/movies/add" class="<%= path=='/movies/add'?'active':'' %>">Add movies</a></li>
+                
+                
+                    <li><a href="/directors/add" class="<%= path=='/directors/add'?'active':'' %>">Add directors</a></li>
+                
+                
                     <li>
                         <form action="/logout" method="post">
                             <button class="nav_button">Logout</button>
                         </form>
                     </li>
-                </a>
             <% } %>
         </ul>
 
+        
+        <ul class="navigation_mobile hide">
+            
+                <li><a href="/movies" class="<%= path=='/movies'?'active':'' %>">Movies</a>
+                </li>
+            
+        
+            
+                <li><a href="/directors" class="<%= path=='/directors'?'active':'' %>">Directors</a>
+                </li>
+            
+            <% if (!isLoggedIn) { %>
+                
+                    <li><a href="/login" class="<%= path=='/login'?'active':'' %>">Login</a></li>
+                
+                
+                    <li><a href="/sign-up" class="<%= path=='/sign-up'?'active':'' %>">Sign up</a></li>
+                <% } 
+            else{ %>
+                
+                    <li><a href="/watched-movies" class="<%= path=='/watched-movies'?'active':'' %>">Watched</a></li>
+                
+                
+                    <li><a href="/wish-list" class="<%= path=='/wish-list'?'active':'' %>">Wish</a></li>
+                
+                
+                    <li><a href="/movies/add" class="<%= path=='/movies/add'?'active':'' %>">Add m</a></li>
+                
+                
+                    <li><a href="/directors/add" class="<%= path=='/directors/add'?'active':'' %>">Add d</a></li>
+                
+                
+                    <li>
+                        <form action="/logout" method="post">
+                            <button class="nav_button">Logout</button>
+                        </form>
+                    </li>
+            <% } %>
+        </ul>    
     </div>
+    <script src="/scripts/drop-down-menu.js"></script>
 </header>

@@ -79,7 +79,8 @@ app.get('/', (req, res, next) => {
 app.use((req, res, next) => {
 	res.status(404).render('404', {
 		pageTitle: 'Error',
-		isLoggedIn: req.session.isLoggedIn
+		isLoggedIn: req.session.isLoggedIn,
+		path: ''
 	});
 });
 
