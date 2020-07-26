@@ -22,18 +22,15 @@
             
                 <li><a href="/movies" class="<%= path=='/movies'?'active':'' %>">Movies</a>
                 </li>
-            
-        
-            
                 <li><a href="/directors" class="<%= path=='/directors'?'active':'' %>">Directors</a>
                 </li>
             
             <% if (!isLoggedIn) { %>
                 
                     <li><a href="/login" class="<%= path=='/login'?'active':'' %>">Login</a></li>
-                
-                
                     <li><a href="/sign-up" class="<%= path=='/sign-up'?'active':'' %>">Sign up</a></li>
+                    <li><a href="/reset" class="<%= path=='/reset'?'active':'' %>">Reset password</a></li>
+
                 <% } 
             else{ %>
                 
@@ -74,6 +71,8 @@
                 
                 
                     <li><a href="/sign-up" class="<%= path=='/sign-up'?'active':'' %>">Sign up</a></li>
+
+                    <li><a href="/reset" class="<%= path=='/reset'?'active':'' %>">Reset password</a></li>
                 <% } 
             else{ %>
                 

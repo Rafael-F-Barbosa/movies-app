@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 const User = require('../models/user');
 
 const bcrypt = require('bcryptjs');
@@ -97,4 +99,54 @@ exports.postSignUp = (req, res, next) => {
 			});
 		})
 		.catch((err) => console.log(err));
+};
+
+exports.getReset = (req, res, next) => {
+	res.render('auth/reset', {
+		pageTitle: 'Reset password',
+		isLoggedIn: req.session.isLoggedIn,
+		path: '/reset'
+	});
+};
+exports.postReset = (req, res, next) => {
+	crypto.randomBytes(32, (err, buffer) => {
+		if (err) {
+			console.log(err);
+			return res.redirect('/reset');
+		}
+		const token = buffer.toString('hex');
+		User.findByEmail(req.body.email)
+			.then((user) => {
+				if (!user) {
+					return res.redirect('/reset');
+				}
+				const objectUser = new User(
+					user.name,
+					user.email,
+					user.password,
+					user.watchedMovies,
+					user.wishMovies,
+					token,
+					Date.now() + 3600000
+				);
+				// console.log(objectUser);
+				return objectUser.save();
+			})
+			.then((result) => {
+				transporter
+					.sendMail({
+						to: req.body.email,
+						from: 'rafernandes1998@hotmail.com',
+						subject: 'Reset password',
+						html: `<h1>Your reset token is: ${token}</h1>`
+					})
+					.then(() => {
+						return res.redirect('/');
+					})
+					.catch((err) => console.log(err));
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	});
 };

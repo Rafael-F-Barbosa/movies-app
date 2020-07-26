@@ -4,12 +4,14 @@ const mongodb = require('mongodb');
 const Movie = require('../models/movie');
 
 module.exports = class User {
-	constructor(name, email, password, watchedMovies, wishMovies) {
+	constructor(name, email, password, watchedMovies, wishMovies, token, tokenExpiration) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.watchedMovies = watchedMovies;
 		this.wishMovies = wishMovies;
+		this.token = token || null;
+		this.tokenExpiration = tokenExpiration || null;
 	}
 	save() {
 		const db = getDb();
