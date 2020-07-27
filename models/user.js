@@ -4,20 +4,29 @@ const mongodb = require('mongodb');
 const Movie = require('../models/movie');
 
 module.exports = class User {
-	constructor(name, email, password, watchedMovies, wishMovies, token, tokenExpiration) {
+	constructor(name, email, password, watchedMovies, wishMovies, id, token, tokenExpiration) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.watchedMovies = watchedMovies;
 		this.wishMovies = wishMovies;
+		this._id =  id ? new mongodb.ObjectId(id) : null;
 		this.token = token || null;
 		this.tokenExpiration = tokenExpiration || null;
 	}
 	save() {
 		const db = getDb();
-		return db
-			.collection('users')
-			.insertOne(this)
+		let dbOperation;
+		if(this._id){
+			dbOperation = db
+				.collection('users')
+				.updateOne({ _id: this._id }, { $set: this })
+		} else{	
+			dbOperation = db
+				.collection('users')
+				.insertOne(this)
+		}
+		return dbOperation
 			.then((result) => {
 				console.log(this);
 				return result;

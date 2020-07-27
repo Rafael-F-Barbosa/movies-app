@@ -5,12 +5,13 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
 const nodemailer = require('nodemailer');
+
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 const transporter = nodemailer.createTransport(
 	sendgridTransport({
 		auth: {
-			api_key: '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'
+			api_key: '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'
 		}
 	})
 );
@@ -126,10 +127,10 @@ exports.postReset = (req, res, next) => {
 					user.password,
 					user.watchedMovies,
 					user.wishMovies,
+					user._id,	
 					token,
 					Date.now() + 3600000
 				);
-				// console.log(objectUser);
 				return objectUser.save();
 			})
 			.then((result) => {
