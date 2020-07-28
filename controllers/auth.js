@@ -4,6 +4,8 @@ const User = require('../models/user');
 
 const bcrypt = require('bcryptjs');
 
+const { validationResult } = require('express-validator');
+
 const nodemailer = require('nodemailer');
 
 const sendgridTransport = require('nodemailer-sendgrid-transport');
@@ -71,35 +73,40 @@ exports.postSignUp = (req, res, next) => {
 	const email = req.body.email;
 	const password = req.body.password;
 	const confirmPassword = req.body.confirmPassword;
-	User.findByEmail(email)
-		.then((user) => {
-			if (user) {
-				console.log('email already exists');
-				return res.redirect('/sign-up');
-			}
-			return bcrypt.hash(password, 12).then((hashPassword) => {
-				const newUser = new User(name, email, hashPassword, [], []);
-				return newUser
-					.save()
-					.then(() => {
-						transporter
-							.sendMail({
-								to: email,
-								from: 'rafernandes1998@hotmail.com',
-								subject: 'Signup succeded!',
-								html: '<h1>You sucessfully signed up!</h1>'
-							})
-							.then(() => {
-								res.redirect('/login');
-							})
-							.catch((err) => {
-								console.log(err);
-							});
+
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		return res.status(422).render('auth/sign-up', {
+			pageTitle: 'Sign up',
+			isLoggedIn: req.session.isLoggedIn,
+			path: '/sign-up'
+		});
+	}
+
+	bcrypt.hash(password, 12).then((hashPassword) => {
+		const newUser = new User(name, email, hashPassword, [], []);
+		return newUser
+			.save()
+			.then(() => {
+				transporter
+					.sendMail({
+						to: email,
+						from: 'rafernandes1998@hotmail.com',
+						subject: 'Signup succeded!',
+						html: '<h1>You sucessfully signed up!</h1>'
 					})
-					.catch((err) => console.log(err));
-			});
-		})
-		.catch((err) => console.log(err));
+					.then(() => {
+						res.redirect('/login');
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			})
+			.catch((err) => console.log(err));
+	});
+
 };
 
 exports.getReset = (req, res, next) => {
@@ -127,7 +134,7 @@ exports.postReset = (req, res, next) => {
 					user.password,
 					user.watchedMovies,
 					user.wishMovies,
-					user._id,	
+					user._id,
 					token,
 					Date.now() + 3600000
 				);
