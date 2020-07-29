@@ -12,7 +12,7 @@ router.get('/login', authController.getLogin);
 
 router.post('/login', [
     check('email').isEmail().withMessage('Please enter a valid email!'),
-    check('password', 'At least 5 characters and alphanumeric only.').isLength({ min: 5 }).isAlphanumeric()
+    check('password', 'Passwords should have at least 5 characters and alphanumeric only.').isLength({ min: 5 }).isAlphanumeric()
 ], authController.postLogin);
 
 router.post('/logout', authController.postLogout);
@@ -26,6 +26,7 @@ router.post('/sign-up',
                 return User.findByEmail(value)
                     .then((user) => {
                         if (user) {
+                            req.flash('error', 'Email already exists!');
                             return Promise.reject('Email already exists!');
                         }
                         return true;

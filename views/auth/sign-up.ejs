@@ -5,6 +5,9 @@
 <body>
     <%- include('../includes/header.ejs') %>
     <main>
+        <%if(errorMessage){%>
+            <%- include('../includes/error-box.ejs') %>
+        <% } %>
         <form class="movie_form" action="/sign-up" method="POST">
             <header>
                 <h2>Sign up</h2>

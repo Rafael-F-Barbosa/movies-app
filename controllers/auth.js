@@ -19,37 +19,41 @@ const transporter = nodemailer.createTransport(
 );
 
 exports.getLogin = (req, res, next) => {
+	console.log('ahoy1');
 	res.render('auth/login', {
 		pageTitle: 'Login',
 		isLoggedIn: req.session.isLoggedIn,
-		path: '/login'
+		path: '/login',
+		errorMessage: null,
 	});
 };
 
 exports.postLogin = (req, res, next) => {
 	const email = req.body.email;
 	const password = req.body.password;
-	
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
-		return res.status(422).render('auth/sign-up', {
-			pageTitle: 'Sign up',
+		return res.status(422).render('auth/login', {
+			pageTitle: 'Login',
 			isLoggedIn: req.session.isLoggedIn,
-			path: '/sign-up'
+			path: '/login',
+			errorMessage: errors.array()[0].msg,
 		});
 	}
 	
 	User.findByEmail(email)
 		.then((user) => {
 			if (!user) {
+				req.flash('error', 'Incorrect user or password');
 				return res.redirect('/login');
 			}
 			bcrypt
 				.compare(password, user.password)
 				.then((doMatch) => {
 					if (!doMatch) {
+						req.flash('error', 'Incorrect user or password');
 						return res.redirect('/login');
 					}
 					console.log(user);
@@ -76,7 +80,8 @@ exports.getSignUp = (req, res, next) => {
 	res.render('auth/sign-up', {
 		pageTitle: 'Sign up',
 		isLoggedIn: req.session.isLoggedIn,
-		path: '/sign-up'
+		path: '/sign-up',
+		errorMessage: null
 	});
 };
 
@@ -92,7 +97,8 @@ exports.postSignUp = (req, res, next) => {
 		return res.status(422).render('auth/sign-up', {
 			pageTitle: 'Sign up',
 			isLoggedIn: req.session.isLoggedIn,
-			path: '/sign-up'
+			path: '/sign-up',
+			errorMessage: errors.array()[0].msg
 		});
 	}
 

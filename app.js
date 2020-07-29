@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const flash = require('connect-flash');
 
 // vanilla modules
 const path = require('path');
@@ -48,6 +49,9 @@ app.use(
 		store: store
 	})
 );
+// registering flash after sessions
+app.use(flash());
+
 // getting the user in the correct object format
 app.use((req, res, next) => {
 	if (!req.session.user) {
