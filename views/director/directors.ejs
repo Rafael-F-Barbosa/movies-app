@@ -1,18 +1,21 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/stylesheets/director-cards.css">
+<link rel="stylesheet" href="/stylesheets/directors.css">
 </head>
 <body>
     <%- include('../includes/header.ejs') %>
-    <main>        
-        <div class="movies_grid">
+    <main>
+        <h1><%= pageTitle %></h1>           
+        <div class="directors_grid">
             <% if (directors.length) { %>
                 <% directors.forEach(director => { %>
-                    <div class="movie_card">
-                        <a href="/directors/director-details/<%= director._id%>">
-                            <img src="https://media.gettyimages.com/photos/director-quentin-tarantino-attends-the-cinemacon-2018-gala-opening-picture-id950513446?s=2048x2048" alt="<%= director.name %>">
-                        </a>
-                        <div>Title: <%= director.name %> </div>
-                        <div>Director: <%= director.birthYear %> </div>
+                    <div class="card card_director">
+                        <div><%= director.name %> </div>
+                            <div>
+                                <a href="/directors/director-details/<%= director._id%>">
+                                    <img src="https://media.gettyimages.com/photos/director-quentin-tarantino-attends-the-cinemacon-2018-gala-opening-picture-id950513446?s=2048x2048" alt="<%= director.name %>">
+                                </a>
+                            </div>
+                        <div>Born: <%= director.birthYear %> </div>
                     </div>
                 <% }) %>
             <% } else { %>

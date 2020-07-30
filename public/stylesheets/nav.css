@@ -105,6 +105,7 @@
 	font-family: 'Montserrat', sans-serif;
 	font-size: 16px;
 	padding-left: 20px;
+	margin: 0;
 }
 .nav_button:hover {
 	cursor: pointer;
@@ -125,7 +126,7 @@
 	height: 100%;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1100px) {
 	.inner_header {
 		display: flex;
 		flex-direction: column;

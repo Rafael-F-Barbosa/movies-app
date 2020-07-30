@@ -1,5 +1,4 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/stylesheets/form-movie.css">
 
 </head>
 <body>
@@ -7,10 +6,8 @@
     
 
     <main>
+        <h1>Add movie</h1>
         <form class="movie_form" action="/movies/add" method="POST">
-            <header>
-                <h2>Add movie</h2>
-            </header>
             <div class="form_control">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" required>

@@ -5,13 +5,11 @@
 <body>
     <%- include('../includes/header.ejs') %>
     <main>
+        <h1>Sign up</h1>
         <%if(errorMessage){%>
             <%- include('../includes/error-box.ejs') %>
         <% } %>
         <form class="movie_form" action="/sign-up" method="POST">
-            <header>
-                <h2>Sign up</h2>
-            </header>
             <div class="form_control">
                 <label for="name">Name</label>
                 <input type="name" name="name" id="name" required>

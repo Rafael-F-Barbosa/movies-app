@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/stylesheets/movie-cards.css">
+<link rel="stylesheet" href="/stylesheets/movies.css">
 
 </head>
 <body>
@@ -9,12 +9,14 @@
         <div class="movies_grid">
             <% if (movies.length) { %>
                 <% movies.forEach(movie => { %>
-                    <div class="movie_card">
-                        <a href="/movies/movie-details/<%= movie._id%>">
-                            <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="<%= movie.title %>">
-                        </a>
-                        <div>Title: <%= movie.title %> </div>
-                        <div><a href="/directors/director-details/<%= movie.directorId%>">Director: <%= movie.directorName %></a></div>
+                    <div class="card <%= userList?'user_card':''%>">
+                        <div><%= movie.title %> </div>
+                        <div>
+                            <a href="/movies/movie-details/<%= movie._id%>">
+                                <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="<%= movie.title %>">
+                            </a>
+                        </div>
+                        <div><a href="/directors/director-details/<%= movie.directorId%>"><p>Director: <%= movie.directorName %></p></a></div>
                         <div>Year: <%= movie.year %> </div>
                         <% if (userList) { %>
                             <div>

@@ -1,14 +1,12 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/stylesheets/form-director.css">
 
 </head>
+
 <body>
     <%- include('../includes/header.ejs') %>
     <main>
+        <h1>Add director</h1>
         <form class="movie_form" action="/directors/add" method="POST">
-            <header>
-                <h2>Add director</h2>
-            </header>
             <div class="form_control">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" required>
@@ -19,4 +17,5 @@
         </form>
     </main>
 </body>
+
 </html>

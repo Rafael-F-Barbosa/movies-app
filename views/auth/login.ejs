@@ -1,27 +1,15 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/stylesheets/form-director.css">
-<style>
-    a {
-        color: black;
-        margin-top: 15px;
-    }
-    a:hover{
-        transform: scale(1.04);
-        text-decoration: underline;
-    }
-</style>
 </head>
 
 <body>
     <%- include('../includes/header.ejs') %>
     <main>
+        <h1>Login</h1>
         <%if(errorMessage){%>
         <%- include('../includes/error-box.ejs') %>
         <% } %>
         <form class="movie_form" action="/login" method="POST" novalidate>
-            <header>
-                <h2>Login</h2>
-            </header>
             <div class="form_control">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" required>
@@ -30,7 +18,7 @@
             </div>
             <button type="submit">Login</button>
         </form>
-        <a href="/reset" class="<%= path=='/reset'?'active':'' %>">Reset password</a>
+        <a class="underline_link" href="/reset" class="<%= path=='/reset'?'active':'' %>">Reset password</a>
     </main>
 </body>
 
