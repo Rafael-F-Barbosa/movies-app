@@ -23,6 +23,7 @@ exports.getAddMovies = (req, res, next) => {
 			pageTitle: 'Add movies',
 			directors: directors,
 			isLoggedIn: req.session.isLoggedIn,
+			errorMessage: null,
 			path: '/movies/add'
 		});
 	});
@@ -32,11 +33,18 @@ exports.postAddMovies = (req, res, next) => {
 	const movieTitle = req.body.title;
 	const directorId = req.body.directorId;
 	const movieYear = req.body.year;
-	const movieImg = req.files['movieImg'][0];
-	if(!movieImg){
-		//  Render the correct view with the error message
-		return res.redirect('/')
+	if(!req.files['movieImg']){
+		return Director.fetchAll().then((directors) => {
+			return res.render('movie/add-movie', {
+				pageTitle: 'Add movies',
+				directors: directors,
+				isLoggedIn: req.session.isLoggedIn,
+				errorMessage: 'Invalid file type!',
+				path: '/movies/add'
+			});
+		});
 	}
+	const movieImg = req.files['movieImg'][0];
 	const movieUrl = '/'+ movieImg.path;
 
 	Director.findById(directorId).then((director) => {

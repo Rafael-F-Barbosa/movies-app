@@ -18,19 +18,24 @@ exports.getAddDirector = (req, res, next) => {
 	res.render('director/add-director', {
 		pageTitle: 'Add director',
 		isLoggedIn: req.session.isLoggedIn,
-		path: '/directors/add'
+		path: '/directors/add',
+		errorMessage: null
 	});
 };
 
 exports.postAddDirector = (req, res, next) => {
 	const directorName = req.body.name;
 	const directorbirthYear = req.body.birthYear;
-	const directorImg = req.files['directorImg'][0];
-	if(!directorImg){
-		//  Render the correct view with the error message
-		return res.redirect('/')
+	if (!req.files['directorImg']) {
+		return res.render('director/add-director', {
+			pageTitle: 'Add director',
+			isLoggedIn: req.session.isLoggedIn,
+			path: '/directors/add',
+			errorMessage: 'Invalid file type'
+		});
 	}
-	const directorUrl = '/'+directorImg.path;
+	const directorImg = req.files['directorImg'][0];
+	const directorUrl = '/' + directorImg.path;
 	const directorCreated = new Director(directorName, directorbirthYear, [], directorUrl);
 	directorCreated
 		.save()
@@ -38,6 +43,7 @@ exports.postAddDirector = (req, res, next) => {
 			res.redirect('/directors');
 		})
 		.catch((err) => console.log(err));
+
 };
 
 exports.getDirector = (req, res, next) => {

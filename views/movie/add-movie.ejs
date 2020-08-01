@@ -1,12 +1,16 @@
 <%- include('../includes/head.ejs') %>
 
 </head>
+
 <body>
     <%- include('../includes/header.ejs') %>
-    
+
 
     <main>
         <h1>Add movie</h1>
+        <%if(errorMessage){%>
+        <%- include('../includes/error-box.ejs') %>
+        <% } %>
         <form class="movie_form" action="/movies/add" method="POST" enctype="multipart/form-data">
             <div class="form_control">
                 <label for="title">Title</label>
@@ -17,7 +21,7 @@
                 <select name="directorId" required>
                     <option value="">Select a director</option>
                     <% directors.forEach(director => { %>
-                        <option value="<%= director._id %>"><%= director.name %></option>
+                    <option value="<%= director._id %>"><%= director.name %></option>
                     <% }) %>
                 </select>
 
@@ -28,4 +32,5 @@
         </form>
     </main>
 </body>
+
 </html>
