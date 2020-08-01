@@ -32,15 +32,16 @@ exports.postAddMovies = (req, res, next) => {
 	const movieTitle = req.body.title;
 	const directorId = req.body.directorId;
 	const movieYear = req.body.year;
-	const movieImg = req.file;
+	const movieImg = req.files['movieImg'][0];
 	if(!movieImg){
 		//  Render the correct view with the error message
 		return res.redirect('/')
 	}
-	const movieUrl = movieImg.path;
+	const movieUrl = '/'+ movieImg.path;
 
 	Director.findById(directorId).then((director) => {
-		const movieCreated = new Movie(movieTitle, movieYear, director.name, directorId, `/${movieUrl}`);
+		console.log(director);
+		const movieCreated = new Movie(movieTitle, movieYear, director.name, directorId, movieUrl);
 		movieCreated
 			.save()
 			.then((movieDb) => {

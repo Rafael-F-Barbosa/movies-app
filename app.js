@@ -59,7 +59,12 @@ const fileFilter = (req, file, cb)=>{
 		cb(null, false)
 	}
 }
-app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('movieImg'))
+// app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('directorImg'))
+// app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('movieImg'))
+app.use(multer({storage: fileStorage, fileFilter: fileFilter}).fields([
+	{ name: 'movieImg', maxCount: 1 },
+	{ name: 'directorImg', maxCount: 1 }
+  ]))
 
 // sessions initialize and configured
 app.use(

@@ -6,12 +6,14 @@
     <%- include('../includes/header.ejs') %>
     <main>
         <h1>Add director</h1>
-        <form class="movie_form" action="/directors/add" method="POST">
+        <form class="movie_form" action="/directors/add" method="POST" enctype="multipart/form-data">
             <div class="form_control">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" required>
+                <label for="directorImg">Image</label>
+                <input type="file" name="directorImg" id="directorImg" required>
                 <label for="birthYear">Birth Year</label>
-                <input type="number" name="birthYear" id="birthYear" required>
+                <input type="number" step="1" name="birthYear" id="birthYear" required>
             </div>
             <button type="submit">Add director</button>
         </form>

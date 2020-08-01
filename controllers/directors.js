@@ -25,7 +25,13 @@ exports.getAddDirector = (req, res, next) => {
 exports.postAddDirector = (req, res, next) => {
 	const directorName = req.body.name;
 	const directorbirthYear = req.body.birthYear;
-	const directorCreated = new Director(directorName, directorbirthYear, []);
+	const directorImg = req.files['directorImg'][0];
+	if(!directorImg){
+		//  Render the correct view with the error message
+		return res.redirect('/')
+	}
+	const directorUrl = '/'+directorImg.path;
+	const directorCreated = new Director(directorName, directorbirthYear, [], directorUrl);
 	directorCreated
 		.save()
 		.then(() => {

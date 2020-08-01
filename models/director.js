@@ -2,10 +2,11 @@ const getDb = require('../util/database').getDb;
 const mongodb = require('mongodb');
 
 module.exports = class Director {
-	constructor(name, birthYear, movies) {
+	constructor(name, birthYear, movies, image) {
 		this.name = name;
 		this.birthYear = birthYear;
 		this.movies = movies;
+		this.image = image;
 	}
 	save() {
 		const db = getDb();
