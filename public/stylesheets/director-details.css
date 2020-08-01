@@ -1,63 +1,27 @@
 .director_details{
     display: flex;
     flex-direction: column;
-}
-
-.movie_detailed{
-    display: flex;
-    flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: 16px;
-    /* background-color: burlywood; */
+    max-width: 1000px;
+    padding-bottom: 20px;
+    border-bottom: 1px groove black;
 }
-.movie_detailed img{
-    width: 400px;
-    height: 500px;
+.director_details div{
+    padding: 5px 0;
 }
-.movie_detailed div{
-    margin-top: 5px;
-    height: 32px;
+.director_details div img{
+    width: 250px;
+    height: 350px;
 }
-
 .movies{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .movies_grid{
-    width: 95%;
+    width: 100%;
     max-width: 1000px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-}
-.movie_card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    height: 350px;
-    margin: 5% auto;
-    padding-top: 5%;
-    box-sizing: border-box;
-    background-color: #363636;
-    border: 3px solid white;
-    border-radius: 12px;
-}
-.movie_card a{
-    height: 67%;
-    width: 90%;
-}
-.movie_card img{
-    height: 100%;
-    width: 100%;
-}
-.movie_card div{
-    margin-top: 1%;
-    height: 10%;
-}
-.movie_card div a{
-    text-decoration: none;
-    color: black;
 }
