@@ -7,13 +7,12 @@
 
     <main>
         <h1>Add movie</h1>
-        <form class="movie_form" action="/movies/add" method="POST">
+        <form class="movie_form" action="/movies/add" method="POST" enctype="multipart/form-data">
             <div class="form_control">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" required>
-
-                <!-- <label for="director">Director</label>
-                <input type="text" name="director" id="director"> -->
+                <label for="movieImg">Image</label>
+                <input type="file" name="movieImg" id="movieImg" required>
                 <label for="directorId">Director</label>
                 <select name="directorId" required>
                     <option value="">Select a director</option>

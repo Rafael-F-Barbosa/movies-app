@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
+const multer = require('multer')
 
 // vanilla modules
 const path = require('path');
@@ -36,9 +37,29 @@ app.set('views', 'views');
 
 // serving files statically
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // middleware that alows to parse in forms
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// middleware function that alows the use of images in requests
+const fileStorage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'images');
+	},
+	filename: (req, file, cb) => {
+		cb(null, new Date().toISOString() + '-' + file.originalname)
+	}
+});
+const fileFilter = (req, file, cb)=>{
+	if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg'|| file.mimetype === 'image/jpg'){
+		cb(null, true)
+	}
+	else{
+		cb(null, false)
+	}
+}
+app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('movieImg'))
 
 // sessions initialize and configured
 app.use(

@@ -4,6 +4,7 @@ const Director = require('../models/director');
 exports.getMovies = (req, res, next) => {
 	Movie.fetchAll()
 		.then((movies) => {
+			console.log(movies);
 			res.render('movie/movies', {
 				pageTitle: 'All movies',
 				movies: movies,
@@ -31,10 +32,15 @@ exports.postAddMovies = (req, res, next) => {
 	const movieTitle = req.body.title;
 	const directorId = req.body.directorId;
 	const movieYear = req.body.year;
+	const movieImg = req.file;
+	if(!movieImg){
+		//  Render the correct view with the error message
+		return res.redirect('/')
+	}
+	const movieUrl = movieImg.path;
 
 	Director.findById(directorId).then((director) => {
-		const movieCreated = new Movie(movieTitle, movieYear, director.name, directorId);
-
+		const movieCreated = new Movie(movieTitle, movieYear, director.name, directorId, `/${movieUrl}`);
 		movieCreated
 			.save()
 			.then((movieDb) => {

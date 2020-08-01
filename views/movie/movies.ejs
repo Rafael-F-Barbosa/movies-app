@@ -13,7 +13,7 @@
                         <div><%= movie.title %> </div>
                         <div>
                             <a href="/movies/movie-details/<%= movie._id%>">
-                                <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="<%= movie.title %>">
+                                <img src="<%= movie.movieUrl %>" alt="<%= movie.title %>">
                             </a>
                         </div>
                         <div><a href="/directors/director-details/<%= movie.directorId%>"><p>Director: <%= movie.directorName %></p></a></div>
