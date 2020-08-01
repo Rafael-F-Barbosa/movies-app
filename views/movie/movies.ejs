@@ -20,7 +20,7 @@
                         <div>Year: <%= movie.year %> </div>
                         <% if (userList) { %>
                             <div>
-                            <form action="/movies/delete-<%= userList %>" method="post">
+                            <form action="/delete-<%= userList %>" method="post">
                                 <input type="hidden" name="movieId" value="<%= movie._id %>">
                                 <button class="card_button">Delete</button>
                             </form>

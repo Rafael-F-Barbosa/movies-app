@@ -23,3 +23,56 @@ exports.getsWishedList = (req, res, next) => {
 		});
 	});
 };
+
+exports.postAddWatched = (req, res, next) => {
+	const user = req.user;
+	const movieId = req.body.movieId;
+	user
+		.saveToWatchList(movieId, req.session.user._id)
+		.then(() => {
+			res.redirect(`/movies/movie-details/${movieId}`);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+exports.postDeleteWatched = (req, res, next) => {
+	const movieId = req.body.movieId;
+	req.user
+		.deleteWatched(movieId, req.session.user._id)
+		.then(() => {
+			console.log('movie deleted');
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+
+	res.redirect('/watched-movies');
+};
+
+exports.postAddWish = (req, res, next) => {
+	const user = req.user;
+	const movieId = req.body.movieId;
+	user
+		.saveToWishList(movieId, req.session.user._id)
+		.then(() => {
+			res.redirect(`/movies/movie-details/${req.body.movieId}`);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
+exports.postDeleteWish = (req, res, next) => {
+	const movieId = req.body.movieId;
+	req.user
+		.deleteWish(movieId, req.session.user._id)
+		.then(() => {
+			console.log('movie deleted');
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+
+	res.redirect('/wish-list');
+};

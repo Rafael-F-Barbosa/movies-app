@@ -12,11 +12,11 @@
             <div>Year: <%= movie.year %> </div>
             <% if (isLoggedIn) { %>
             <div class="buttons">
-                <form action="/movies/add-to-watched/" method="post">
+                <form action="/add-to-watched/" method="post">
                     <input type="hidden" name="movieId" value="<%=movie._id%>">
                     <button type="submit">Add to watched</button>
                 </form>
-                <form action="/movies/add-to-wish/" method="post">
+                <form action="/add-to-wish/" method="post">
                     <input type="hidden" name="movieId" value="<%=movie._id%>">
                     <button type="submit">Add to wish</button>
                 </form>
