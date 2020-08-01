@@ -6,9 +6,9 @@
     <%- include('../includes/header.ejs') %>
     <main>
         <div class="movie_detailed">
+            <div><h1><%= movie.title %> </h1></div>
             <img src="https://i.pinimg.com/564x/e8/11/b2/e811b2175e459dec1af04097a791849d.jpg" alt="<%= movie.title %>">
-            <div>Title: <%= movie.title %> </div>
-            <div>Director: <%= movie.directorName %> </div>
+            <div>Director: <%= movie.directorName %></div>
             <div>Year: <%= movie.year %> </div>
             <% if (isLoggedIn) { %>
             <div class="buttons">

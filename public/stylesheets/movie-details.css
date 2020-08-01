@@ -3,20 +3,15 @@
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	height: 90vh;
-	padding-top: 16px;
-	background-color: #363636;
-}
-.movie_detailed img {
-	width: 400px;
-	height: 500px;
-	padding-bottom: 16px;
 }
 .movie_detailed div {
-	text-align: center;
-	width: 100%;
-	margin-top: 5px;
-	height: 32px;
+	padding: 7px 0;
+}
+.movie_detailed img {
+	width: 250px;
+	height: 350px;
+	border: 3px solid black;
+	border-radius: 7px;
 }
 
 .movie_detailed div.buttons {
