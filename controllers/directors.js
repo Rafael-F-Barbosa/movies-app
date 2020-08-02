@@ -1,4 +1,5 @@
 const Director = require('../models/director');
+const { validationResult } = require('express-validator');
 
 exports.getDirectors = (req, res, next) => {
 	Director.fetchAll()
@@ -26,6 +27,18 @@ exports.getAddDirector = (req, res, next) => {
 exports.postAddDirector = (req, res, next) => {
 	const directorName = req.body.name;
 	const directorbirthYear = req.body.birthYear;
+
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		return res.render('director/add-director', {
+			pageTitle: 'Add director',
+			isLoggedIn: req.session.isLoggedIn,
+			path: '/directors/add',
+			errorMessage: errors.array()[0].msg
+		});
+	}
+
 	if (!req.files['directorImg']) {
 		return res.render('director/add-director', {
 			pageTitle: 'Add director',
@@ -43,7 +56,6 @@ exports.postAddDirector = (req, res, next) => {
 			res.redirect('/directors');
 		})
 		.catch((err) => console.log(err));
-
 };
 
 exports.getDirector = (req, res, next) => {

@@ -1,5 +1,6 @@
 const Movie = require('../models/movie');
 const Director = require('../models/director');
+const { validationResult } = require('express-validator');
 
 exports.getMovies = (req, res, next) => {
 	Movie.fetchAll()
@@ -33,9 +34,25 @@ exports.postAddMovies = (req, res, next) => {
 	const movieTitle = req.body.title;
 	const directorId = req.body.directorId;
 	const movieYear = req.body.year;
-	if(!req.files['movieImg']){
+
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
 		return Director.fetchAll().then((directors) => {
-			return res.render('movie/add-movie', {
+			res.render('movie/add-movie', {
+				pageTitle: 'Add movies',
+				directors: directors,
+				isLoggedIn: req.session.isLoggedIn,
+				errorMessage: errors.array()[0].msg,
+				path: '/movies/add'
+			});
+		});
+	}
+
+	if (!req.files['movieImg']) {
+		return Director.fetchAll().then((directors) => {
+			return res.status(422).render('movie/add-movie', {
 				pageTitle: 'Add movies',
 				directors: directors,
 				isLoggedIn: req.session.isLoggedIn,
@@ -45,7 +62,7 @@ exports.postAddMovies = (req, res, next) => {
 		});
 	}
 	const movieImg = req.files['movieImg'][0];
-	const movieUrl = '/'+ movieImg.path;
+	const movieUrl = '/' + movieImg.path;
 
 	Director.findById(directorId).then((director) => {
 		console.log(director);
@@ -53,7 +70,7 @@ exports.postAddMovies = (req, res, next) => {
 		movieCreated
 			.save()
 			.then((movieDb) => {
-				const d = new Director(director.name, director.birthYear, director.movies,director.image);
+				const d = new Director(director.name, director.birthYear, director.movies, director.image);
 				d.addMovie(movieCreated, director._id).then(() => {
 					res.redirect('/');
 				});
@@ -74,57 +91,4 @@ exports.getMovie = (req, res, next) => {
 			});
 		})
 		.catch((err) => console.log(err));
-};
-
-exports.postAddWatched = (req, res, next) => {
-	const user = req.user;
-	const movieId = req.body.movieId;
-	user
-		.saveToWatchList(movieId, req.session.user._id)
-		.then(() => {
-			res.redirect(`/movies/movie-details/${movieId}`);
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-};
-exports.postDeleteWatched = (req, res, next) => {
-	const movieId = req.body.movieId;
-	req.user
-		.deleteWatched(movieId, req.session.user._id)
-		.then(() => {
-			console.log('movie deleted');
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-
-	res.redirect('/watched-movies');
-};
-
-exports.postAddWish = (req, res, next) => {
-	const user = req.user;
-	const movieId = req.body.movieId;
-	user
-		.saveToWishList(movieId, req.session.user._id)
-		.then(() => {
-			res.redirect(`/movies/movie-details/${req.body.movieId}`);
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-};
-
-exports.postDeleteWish = (req, res, next) => {
-	const movieId = req.body.movieId;
-	req.user
-		.deleteWish(movieId, req.session.user._id)
-		.then(() => {
-			console.log('movie deleted');
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-
-	res.redirect('/wish-list');
 };
