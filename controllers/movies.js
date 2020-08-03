@@ -2,18 +2,34 @@ const Movie = require('../models/movie');
 const Director = require('../models/director');
 const { validationResult } = require('express-validator');
 
+const ITEMS_PER_PAGE = 1;
+
 exports.getMovies = (req, res, next) => {
-	Movie.fetchAll()
-		.then((movies) => {
-			console.log(movies);
-			res.render('movie/movies', {
-				pageTitle: 'All movies',
-				movies: movies,
-				isLoggedIn: req.session.isLoggedIn,
-				userList: null,
-				path: '/movies'
+	let page = +req.query.page || 1;
+	console.log(page);
+	let totalMovies;
+	Movie.countMovies()
+		.then((totalMov) => {
+			totalMovies = totalMov;
+			if (page > Math.ceil(totalMovies / ITEMS_PER_PAGE)) {
+				page = Math.ceil(totalMovies / ITEMS_PER_PAGE);
+			}
+			Movie.fetchAll(ITEMS_PER_PAGE, page).then((movies) => {
+				res.render('movie/movies', {
+					pageTitle: 'All movies',
+					movies: movies,
+					isLoggedIn: req.session.isLoggedIn,
+					userList: null,
+					path: '/movies',
+					currentPage: page,
+					hasNextPage: ITEMS_PER_PAGE * page < totalMovies,
+					hasPreviousPage: page > 1,
+					nextPage: page + 1,
+					previousPage: page - 1,
+					lastPage: Math.ceil(totalMovies / ITEMS_PER_PAGE)
+				});
+				console.log('Movies fetched from mongodb!');
 			});
-			console.log('Movies fetched from mongodb!');
 		})
 		.catch((err) => console.log(err));
 };

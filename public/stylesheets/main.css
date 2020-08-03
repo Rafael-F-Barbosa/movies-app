@@ -8,40 +8,40 @@ main {
 * {
 	box-sizing: border-box;
 }
-h1{
+h1 {
 	margin: 10px 0;
 }
 /* Form pattern */
-form{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 600px;
+form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 600px;
 }
-form header{
-    margin: 20px auto 0;
+form header {
+	margin: 20px auto 0;
 }
-form button{
-    display: block;
-    margin: 10px auto 0;
-    width: 100px;
+form button {
+	display: block;
+	margin: 10px auto 0;
+	width: 100px;
 }
-.form_control{
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    margin: 10px auto;
+.form_control {
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+	margin: 10px auto;
 }
-.form_control label{
-    margin-top: 10px;
+.form_control label {
+	margin-top: 10px;
 }
-.form_control input{
-    margin-top: 5px;
-    width: 95%;
+.form_control input {
+	margin-top: 5px;
+	width: 95%;
 }
-.form_control select{
-    margin-top: 5px;
-    width: 95%;
+.form_control select {
+	margin-top: 5px;
+	width: 95%;
 }
 /* Card pattern */
 .card {
@@ -49,7 +49,7 @@ form button{
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	
+
 	width: 85%;
 	height: 375px;
 	margin: 5% auto;
@@ -70,10 +70,10 @@ form button{
 	font-family: 'Montserrat', sans-serif;
 	font-size: 16px;
 }
-.card div:first-child{
+.card div:first-child {
 	font-size: 19px;
 }
-.card div:nth-child(2){
+.card div:nth-child(2) {
 	height: 220px;
 }
 .card div a {
@@ -81,37 +81,41 @@ form button{
 	width: 100%;
 	text-decoration: none;
 	color: white;
-} 
+}
 .card div a img {
 	height: 100%;
-	width: 100%; 
+	width: 100%;
 }
-.card div a p{
+.card div a p {
 	line-height: 40px;
 	padding: auto 0;
 }
 
 /* Error box */
-.error_box{
+.error_box {
 	display: flex;
 	justify-content: center;
 	width: 100%;
 	max-width: 360px;
 	margin: 20px auto;
 	padding: 0 auto;
-	border: 2px solid #D8000C;
+	border: 2px solid #d8000c;
 	border-radius: 3px;
-	color: #D8000C;
-    background-color: #FFD2D2;
+	color: #d8000c;
+	background-color: #ffd2d2;
 }
 /* Anchor type */
 a.underline_link {
-    color: black;
-    margin-top: 15px;
+	color: black;
+	margin-top: 15px;
 }
-a.underline_link:hover{
-    transform: scale(1.04);
-    text-decoration: underline;
+a.underline_link:hover {
+	transform: scale(1.04);
+	text-decoration: underline;
+}
+
+.active_page {
+	color: red;
 }
 
 @media screen and (max-width: 940px) {
