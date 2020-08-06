@@ -49,7 +49,7 @@ module.exports = class Movie {
 		const db = getDb();
 		return db
 			.collection('movies')
-			.count()
+			.countDocuments()
 			.then((result) => {
 				return result;
 			})

@@ -1,9 +1,7 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
-const mongoURI =
-	'mongodb+srv://Rafael-F-Barbosa:3aWKh7qeDCgu1RK1@cluster0.gtpef.mongodb.net/MyVideos?retryWrites=true&w=majority';
-
+const mongoURI = 'mongodb+srv://Rafael-F-Barbosa:3aWKh7qeDCgu1RK1@cluster0.gtpef.mongodb.net/MyVideos';
 let _db;
 
 const mongoConnect = (callback) => {
@@ -28,3 +26,4 @@ const getDb = () => {
 
 exports.mongoConnect = mongoConnect;
 exports.getDb = getDb;
+exports.mongoURI = mongoURI;

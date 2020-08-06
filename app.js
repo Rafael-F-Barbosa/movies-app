@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
-const multer = require('multer')
+const multer = require('multer');
 
 // vanilla modules
 const path = require('path');
@@ -20,12 +20,12 @@ const User = require('./models/user');
 
 // database connection
 const mongoConnect = require('./util/database').mongoConnect;
-
+const mongoURI = require('./util/database').mongoURI;
 // create the express application
 const app = express();
 // initialize a new store session
 const store = new MongoDBStore({
-	uri: 'mongodb+srv://Rafael-F-Barbosa:3aWKh7qeDCgu1RK1@cluster0.gtpef.mongodb.net/MyVideos',
+	uri: mongoURI,
 	collection: 'sessions'
 });
 
@@ -48,23 +48,24 @@ const fileStorage = multer.diskStorage({
 		cb(null, 'images');
 	},
 	filename: (req, file, cb) => {
-		cb(null, new Date().toISOString() + '-' + file.originalname)
+		cb(null, new Date().toISOString() + '-' + file.originalname);
 	}
 });
-const fileFilter = (req, file, cb)=>{
-	if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg'|| file.mimetype === 'image/jpg'){
-		cb(null, true)
+const fileFilter = (req, file, cb) => {
+	if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg') {
+		cb(null, true);
+	} else {
+		cb(null, false);
 	}
-	else{
-		cb(null, false)
-	}
-}
+};
 // app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('directorImg'))
 // app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('movieImg'))
-app.use(multer({storage: fileStorage, fileFilter: fileFilter}).fields([
-	{ name: 'movieImg', maxCount: 1 },
-	{ name: 'directorImg', maxCount: 1 }
-  ]))
+app.use(
+	multer({ storage: fileStorage, fileFilter: fileFilter }).fields([
+		{ name: 'movieImg', maxCount: 1 },
+		{ name: 'directorImg', maxCount: 1 }
+	])
+);
 
 // sessions initialize and configured
 app.use(
@@ -116,7 +117,9 @@ app.use((req, res, next) => {
 
 // Connect to mongodb
 mongoConnect(() => {
-	console.log('Ok');
+	app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 });
 
-module.exports = app;
+const PORT = process.env.PORT || 3000;
+
+// module.exports = app;
