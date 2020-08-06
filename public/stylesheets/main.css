@@ -113,9 +113,26 @@ a.underline_link:hover {
 	transform: scale(1.04);
 	text-decoration: underline;
 }
-
-.active_page {
-	color: red;
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.pagination a {
+	background-color: #101010;
+	margin: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	width: 30px;
+	height: 40px;
+	border-radius: 4px;
+}
+.pagination a:hover,
+.pagination a.active_page {
+	color: #ffd700;
 }
 
 @media screen and (max-width: 940px) {
