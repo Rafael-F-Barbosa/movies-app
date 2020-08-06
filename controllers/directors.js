@@ -1,16 +1,32 @@
 const Director = require('../models/director');
 const { validationResult } = require('express-validator');
+const ITEMS_PER_PAGE = 1;
 
 exports.getDirectors = (req, res, next) => {
-	Director.fetchAll()
-		.then((directors) => {
-			res.render('director/directors', {
-				pageTitle: 'Directors',
-				directors: directors,
-				isLoggedIn: req.session.isLoggedIn,
-				path: '/directors'
+	let page = +req.query.page || 1;
+	console.log(page);
+	let totalDirectors;
+	Director.countDirectors()
+		.then((numberOfDirectors) => {
+			totalDirectors = numberOfDirectors;
+			if (page > Math.ceil(totalDirectors / ITEMS_PER_PAGE)) {
+				page = Math.ceil(totalDirectors / ITEMS_PER_PAGE);
+			}
+			Director.fetchAll(ITEMS_PER_PAGE, page).then((directors) => {
+				res.render('director/directors', {
+					pageTitle: 'Directors',
+					directors: directors,
+					isLoggedIn: req.session.isLoggedIn,
+					path: '/directors',
+					currentPage: page,
+					hasNextPage: ITEMS_PER_PAGE * page < totalDirectors,
+					hasPreviousPage: page > 1,
+					nextPage: page + 1,
+					previousPage: page - 1,
+					lastPage: Math.ceil(totalDirectors / ITEMS_PER_PAGE)
+				});
+				console.log('Directors fetched from mongodb!');
 			});
-			console.log('Directors fetched from mongodb!');
 		})
 		.catch((err) => console.log(err));
 };
@@ -27,7 +43,6 @@ exports.getAddDirector = (req, res, next) => {
 exports.postAddDirector = (req, res, next) => {
 	const directorName = req.body.name;
 	const directorbirthYear = req.body.birthYear;
-
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {

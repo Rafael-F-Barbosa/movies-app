@@ -23,11 +23,13 @@ module.exports = class Director {
 		this.movies.push(movie);
 		return db.collection('directors').updateOne({ _id: directorId }, { $set: this });
 	}
-	static fetchAll() {
+	static fetchAll(itemsPerPage, page) {
 		const db = getDb();
 		return db
 			.collection('directors')
 			.find()
+			.skip((page - 1) * itemsPerPage)
+			.limit(itemsPerPage)
 			.toArray()
 			.then((directors) => {
 				return directors;
@@ -45,4 +47,14 @@ module.exports = class Director {
 			})
 			.catch((err) => console.log(err));
 	}
+	static countDirectors = () => {
+		const db = getDb();
+		return db
+			.collection('directors')
+			.countDocuments()
+			.then((numberOfDirectors) => {
+				return numberOfDirectors;
+			})
+			.catch((err) => console.log(err));
+	};
 };

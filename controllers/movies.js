@@ -6,7 +6,6 @@ const ITEMS_PER_PAGE = 1;
 
 exports.getMovies = (req, res, next) => {
 	let page = +req.query.page || 1;
-	console.log(page);
 	let totalMovies;
 	Movie.countMovies()
 		.then((totalMov) => {
@@ -45,7 +44,6 @@ exports.getAddMovies = (req, res, next) => {
 		});
 	});
 };
-
 exports.postAddMovies = (req, res, next) => {
 	const movieTitle = req.body.title;
 	const directorId = req.body.directorId;
