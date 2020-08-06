@@ -16,14 +16,10 @@ module.exports = class User {
 	save() {
 		const db = getDb();
 		let dbOperation;
-		if(this._id){
-			dbOperation = db
-				.collection('users')
-				.updateOne({ _id: this._id }, { $set: this })
-		} else{	
-			dbOperation = db
-				.collection('users')
-				.insertOne(this)
+		if (this._id) {
+			dbOperation = db.collection('users').updateOne({ _id: this._id }, { $set: this });
+		} else {
+			dbOperation = db.collection('users').insertOne(this);
 		}
 		return dbOperation
 			.then((result) => {
@@ -62,9 +58,10 @@ module.exports = class User {
 			})
 			.catch((err) => console.log(err));
 	}
-	getMyMovies(moviesIds) {
+	getMyMovies(moviesIds, itemsPerPage, page) {
+		const moviesSliced = moviesIds.slice((page - 1) * itemsPerPage, (page - 1) * itemsPerPage + itemsPerPage);
 		return Promise.all(
-			moviesIds.map((elementId) => {
+			moviesSliced.map((elementId) => {
 				return new Promise((resolve, reject) => {
 					Movie.findById(elementId).then((movie) => resolve(movie)).catch((err) => {
 						console.log(err);
@@ -73,7 +70,6 @@ module.exports = class User {
 			})
 		)
 			.then((listOfMovies) => {
-				console.log(listOfMovies);
 				return listOfMovies;
 			})
 			.catch((err) => {

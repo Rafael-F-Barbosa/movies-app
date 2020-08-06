@@ -1,25 +1,49 @@
+const ITEMS_PER_PAGE = 6;
+
 exports.getWatchedMovies = (req, res, next) => {
 	const moviesIds = req.user.watchedMovies;
-	req.user.getMyMovies(moviesIds).then((movies) => {
+	let page = +req.query.page || 1;
+	const totalMovies = moviesIds.length;
+	if (page > Math.ceil(totalMovies / ITEMS_PER_PAGE)) {
+		page = Math.ceil(totalMovies / ITEMS_PER_PAGE);
+	}
+	req.user.getMyMovies(moviesIds, ITEMS_PER_PAGE, page).then((movies) => {
 		res.render('movie/movies', {
 			pageTitle: 'My movies',
 			movies: movies,
 			isLoggedIn: req.session.isLoggedIn,
 			userList: 'watched',
-			path: '/watched-movies'
+			path: '/watched-movies',
+			currentPage: page,
+			hasNextPage: ITEMS_PER_PAGE * page < totalMovies,
+			hasPreviousPage: page > 1,
+			nextPage: page + 1,
+			previousPage: page - 1,
+			lastPage: Math.ceil(totalMovies / ITEMS_PER_PAGE)
 		});
 	});
 };
 
 exports.getsWishedList = (req, res, next) => {
 	const moviesIds = req.user.wishMovies;
-	req.user.getMyMovies(moviesIds).then((movies) => {
+	let page = +req.query.page || 1;
+	const totalMovies = moviesIds.length;
+	if (page > Math.ceil(totalMovies / ITEMS_PER_PAGE)) {
+		page = Math.ceil(totalMovies / ITEMS_PER_PAGE);
+	}
+	req.user.getMyMovies(moviesIds, ITEMS_PER_PAGE, page).then((movies) => {
 		res.render('movie/movies', {
 			pageTitle: 'Wished list',
 			movies: movies,
 			isLoggedIn: req.session.isLoggedIn,
 			userList: 'wish',
-			path: '/wish-list'
+			path: '/wish-list',
+			currentPage: page,
+			hasNextPage: ITEMS_PER_PAGE * page < totalMovies,
+			hasPreviousPage: page > 1,
+			nextPage: page + 1,
+			previousPage: page - 1,
+			lastPage: Math.ceil(totalMovies / ITEMS_PER_PAGE)
 		});
 	});
 };

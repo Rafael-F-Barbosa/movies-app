@@ -1,6 +1,6 @@
 const Director = require('../models/director');
 const { validationResult } = require('express-validator');
-const ITEMS_PER_PAGE = 1;
+const ITEMS_PER_PAGE = 6;
 
 exports.getDirectors = (req, res, next) => {
 	let page = +req.query.page || 1;

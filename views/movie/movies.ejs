@@ -6,8 +6,8 @@
     <%- include('../includes/header.ejs') %>
     <main>
         <h1><%= pageTitle %></h1>        
-        <div class="movies_grid">
-            <% if (movies.length) { %>
+        <% if (movies.length) { %>
+            <div class="movies_grid">
                 <% movies.forEach(movie => { %>
                     <div class="card <%= userList?'user_card':''%>">
                         <div><%= movie.title %> </div>
@@ -20,19 +20,21 @@
                         <div>Year: <%= movie.year %> </div>
                         <% if (userList) { %>
                             <div>
-                            <form action="/delete-<%= userList %>" method="post">
-                                <input type="hidden" name="movieId" value="<%= movie._id %>">
-                                <button class="card_button">Delete</button>
-                            </form>
+                                <form action="/delete-<%= userList %>" method="post">
+                                    <input type="hidden" name="movieId" value="<%= movie._id %>">
+                                    <button class="card_button">Delete</button>
+                                </form>
                             </div>
                         <% } %>
                     </div>
                 <% }) %>
-            <% } else { %>
-                <h1>No movies to show</h1>
-            <% } %>
-        </div>
+            </div>
+
+            <%- include('../includes/pagination.ejs') %>
+
+        <% } else { %>
+            <h1>No movies to show</h1>
+        <% } %>
     </main>
-    <%- include('../includes/pagination.ejs') %>
 </body>
 </html>
