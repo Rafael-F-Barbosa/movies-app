@@ -117,9 +117,8 @@ app.use((req, res, next) => {
 
 // Connect to mongodb
 mongoConnect(() => {
+	const PORT = process.env.PORT || 3000;
 	app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 });
-
-const PORT = process.env.PORT || 3000;
 
 // module.exports = app;
