@@ -51,6 +51,7 @@ exports.getsWishedList = (req, res, next) => {
 exports.postAddWatched = (req, res, next) => {
 	const user = req.user;
 	const movieId = req.body.movieId;
+	const message = 'Film added to watched!';
 	user
 		.saveToWatchList(movieId, req.session.user._id)
 		.then(() => {
@@ -77,10 +78,11 @@ exports.postDeleteWatched = (req, res, next) => {
 exports.postAddWish = (req, res, next) => {
 	const user = req.user;
 	const movieId = req.body.movieId;
+	const message = 'Movie added to wish list';
 	user
 		.saveToWishList(movieId, req.session.user._id)
 		.then(() => {
-			res.redirect(`/movies/movie-details/${req.body.movieId}`);
+			res.redirect(`/movies/movie-details/${movieId}`);
 		})
 		.catch((err) => {
 			console.log(err);

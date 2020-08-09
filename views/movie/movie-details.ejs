@@ -1,11 +1,12 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/stylesheets/movies.css">
+<link rel="stylesheet" href="/stylesheets/modal.css">
 
 </head>
 <body>
     <%- include('../includes/header.ejs') %>
     <main>
-        <div class="movie_detailed">
+        <div class="movie_detailed modal-on">
             <div><h1><%= movie.title %> </h1></div>
             <img src="<%=movie.movieUrl%>" alt="<%= movie.title %>">
             <div>Director: <%= movie.directorName %></div>
@@ -22,6 +23,11 @@
                 </form>
             </div>
             <% } %>
+        </div>
+        <div id="modal" class="modal-container hide-modal">
+            <div class="modal-content">
+                <%= modalMessage %>
+            </div>
         </div>
     </main>
 </body>

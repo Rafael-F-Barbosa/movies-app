@@ -95,13 +95,19 @@ exports.postAddMovies = (req, res, next) => {
 
 exports.getMovie = (req, res, next) => {
 	const movieId = req.params.movieId;
+	// let modalMessage = req.params.message;
+	// if (modalMessage === 'false') {
+	// 	modalMessage = null;
+	// }
+
 	Movie.findById(movieId)
 		.then((movie) => {
 			res.render('movie/movie-details', {
 				pageTitle: movie.title,
 				movie: movie,
 				isLoggedIn: req.session.isLoggedIn,
-				path: ''
+				path: '',
+				modalMessage: null
 			});
 		})
 		.catch((err) => console.log(err));
